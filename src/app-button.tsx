@@ -1,8 +1,6 @@
 import React from 'react';
 
-export const AppButton: React.FunctionComponent<AppButtonProps> = (props: AppButtonProps) => {
-
-    const {label, className, onButtonClick} = props;
+export const AppButton: React.FunctionComponent<AppButtonProps> = ({label, className, onButtonClick}) => {
 
     return (
         <button
