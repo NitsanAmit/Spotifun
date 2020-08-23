@@ -1,20 +1,20 @@
 import React from 'react';
 
-export const AppButton: React.FunctionComponent<AppButtonProps> = ({label, className, onButtonClick}) => {
+export const AppButton: React.FunctionComponent<AppButtonProps> = ({label, className, url}) => {
 
     return (
-        <button
+        <a
             className={className}
-            onClick={onButtonClick}
+            href={url}
         >
             {label}
-        </button>
+        </a>
     )
 }
 
 interface AppButtonProps {
     label: string;
     className?: string;
-    onButtonClick: (event: any) => void;
+    url: string;
 }
 
