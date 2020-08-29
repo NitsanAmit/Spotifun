@@ -1,5 +1,4 @@
 
-
 export class Artist {
     public genres: string[] = [];
     public id: string = "";
@@ -14,5 +13,4 @@ export class Genre {
     public genres: stirng[] = [];
     public imagePath: string = "";
     public selected: boolean;
-
 }

@@ -1,9 +1,10 @@
 import React from "react";
-import {SelectionBox} from "./selection-box";
-import {Genre} from "./models/Models";
+import {SelectionBox} from "../selection-box";
+import {Genre} from "../models/Models";
+import {observer} from "mobx-react";
 
 
-export const GenreSelectionBox: React.FC<GenreSelectionBoxProps> = ({genre, onItemSelect}) => {
+export const GenreSelectionBox: React.FC<GenreSelectionBoxProps> = observer(({genre, onItemSelect}) => {
 
     return (
         <SelectionBox
@@ -15,7 +16,7 @@ export const GenreSelectionBox: React.FC<GenreSelectionBoxProps> = ({genre, onIt
             onItemSelect={onItemSelect}
         />
     )
-}
+})
 
 interface GenreSelectionBoxProps {
     genre: Genre,

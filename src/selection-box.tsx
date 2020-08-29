@@ -25,5 +25,5 @@ interface SelectionBoxProps {
     label: string,
     backgroundImage: string,
     isSelected: boolean;
-    onItemSelect: (event: any) => void;
+    onItemSelect: (itemId: string) => void;
 }
