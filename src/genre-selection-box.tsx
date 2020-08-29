@@ -3,7 +3,7 @@ import {SelectionBox} from "./selection-box";
 import {Genre} from "./models/Models";
 
 
-export const GenreSelectionBox: React.FC<genreSelectionBoxProps> = ({genre, onItemSelect}) => {
+export const GenreSelectionBox: React.FC<GenreSelectionBoxProps> = ({genre, onItemSelect}) => {
 
     return (
         <SelectionBox
@@ -17,9 +17,9 @@ export const GenreSelectionBox: React.FC<genreSelectionBoxProps> = ({genre, onIt
     )
 }
 
-interface genreSelectionBoxProps {
+interface GenreSelectionBoxProps {
     genre: Genre,
-    onItemSelect: (event: any) => void
+    onItemSelect: (event: string) => void
 }
 
 const styles = {
