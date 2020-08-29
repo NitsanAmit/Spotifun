@@ -4,8 +4,10 @@ import {LoginForm} from "./login-form";
 import {GenrePicker} from "./genre-selection/genre-picker";
 import {SpotifyApi} from "./spotifyApi";
 import {GenreStore} from "./genre-selection/genre-store";
+import {AppButton} from "./app-button";
+import {observer} from "mobx-react";
 
-export const Spotifun: React.FunctionComponent = (props => {
+export const Spotifun: React.FunctionComponent = observer((props => {
     const [step, setStep] = useState<AppStep>(AppStep.Login);
     const [token, setToken] = useState<string>(window.sessionStorage.getItem(TOKEN_STORAGE_KEY) || '');
     const [genreStore] = useState<GenreStore>(new GenreStore());
@@ -31,14 +33,19 @@ export const Spotifun: React.FunctionComponent = (props => {
     return (
         <div style={{alignItems: "center", textAlign: "center"}}>
             {
-                step === AppStep.Login && <LoginForm/>
+                step === AppStep.Login && <LoginForm />
             }
             {
-                step === AppStep.GenresSelection && <GenrePicker genreStore={genreStore}/>
+                step === AppStep.GenresSelection && <>
+                <GenrePicker genreStore={genreStore}/>
+                <AppButton label="Proceed to artists selection >"
+                           disabled={!genreStore.selectionComplete}
+                           onButtonClick={() => { if (genreStore.selectionComplete) setStep(AppStep.ArtistsSelection)}}/>
+                </>
             }
         </div>
     )
-})
+}))
 
 const hash: { access_token: string } = window.location.hash.substring(1).split("&").reduce(function (hashParams, item) {
     if (item) {

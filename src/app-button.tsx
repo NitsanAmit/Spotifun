@@ -1,20 +1,21 @@
 import React from 'react';
+import './styles/buttons.css'
 
-export const AppButton: React.FunctionComponent<AppButtonProps> = ({label, className, url}) => {
+export const AppButton: React.FunctionComponent<AppButtonProps> = ({label, onButtonClick, url, disabled}) => {
 
     return (
-        <a
-            className={className}
-            href={url}
-        >
-            {label}
+        <a className="no-decorations" href={url} >
+            <button className="app-btn" onClick={onButtonClick} disabled={disabled}>
+                {label}
+            </button>
         </a>
     )
 }
 
 interface AppButtonProps {
     label: string;
-    className?: string;
-    url: string;
+    url?: string;
+    disabled?: boolean;
+    onButtonClick?: (event: React.MouseEvent) => void;
 }
 

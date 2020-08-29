@@ -1,0 +1,22 @@
+.no-decorations{
+    text-decoration: none;
+}
+
+.app-btn{
+    font: 600 20px 'Titillium Web', sans-serif ;
+    display: block;
+    margin: 24px auto;
+    padding: 8px 24px;
+    border: none;
+    outline:none;
+    border-radius: 5px;
+    color: white;
+    background: #ff7676;
+    cursor: pointer;
+}
+
+
+.app-btn:disabled{
+    background: #ffb3b3;
+    cursor: default;
+}
