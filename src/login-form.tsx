@@ -4,7 +4,7 @@ import {LoginConsts} from "./models/app-consts";
 import {InformationPanel} from "./info-panel";
 
 
-export const LoginForm: React.FunctionComponent = (props) => {
+export const LoginForm: React.FunctionComponent = () => {
     return (
         <>
             <InformationPanel title={"Hello!"} description={"Please login to enjoy our amazing applicatzyush"}/>
@@ -16,4 +16,5 @@ export const LoginForm: React.FunctionComponent = (props) => {
     )
 };
 
-const loginUrl = `${LoginConsts.authEndpoint}?client_id=${LoginConsts.clientId}&redirect_uri=${encodeURIComponent(LoginConsts.redirectUri)}&scope=${encodeURIComponent(LoginConsts.scopes)}&response_type=token&show_dialog=true`
+const {authEndpoint, clientId, redirectUri, scopes} = LoginConsts;
+const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&response_type=code`
