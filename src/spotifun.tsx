@@ -20,8 +20,7 @@ export const Spotifun: React.FunctionComponent = (props => {
         }
     });
 
-    const onItemSelect = (selectedItem: React.MouseEvent) => {
-        const currId: string = selectedItem.currentTarget.id;
+    const onItemSelect = (currId: string) => {
         const selectedGenresCopy = selectedGenres.splice(0);
         
         if (!genresList[currId].selected && selectedGenresCopy.length < 2) {
@@ -44,6 +43,7 @@ export const Spotifun: React.FunctionComponent = (props => {
             {
                 step === AppStep.GenresSelection && <GenrePicker genres={genresList} onItemSelect={onItemSelect}/>
             }
+
         </div>
     )
 })
