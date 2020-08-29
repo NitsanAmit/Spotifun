@@ -1,4 +1,4 @@
-import {Artist} from "./models/artist";
+import {Artist} from "./models/Models";
 
 export class SpotifyApi {
 
