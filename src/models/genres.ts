@@ -1,0 +1,105 @@
+import {Genre} from "./Models";
+import {pop, rock, country, indie, metal,
+    jazz, hipHop, electronic, sad, happy,
+    dancey, angry, relaxed, workout} from '../icons'
+
+export const Genres: {[key: string]: Genre} = {
+    pop : {
+        id: "pop",
+        name: "Pop",
+        genres: ["indie-pop", "pop"],
+        imagePath: pop,
+        selected: false,
+    },
+    rock : {
+        id: "rock",
+        name: "Rock",
+        genres: ["rock", "hard-rock","rock-n-roll"],
+        imagePath: rock,
+        selected: false,
+    },
+    country : {
+        id: "country",
+        name: "Country",
+        genres: ["country"],
+        imagePath: country,
+        selected: false,
+    },
+    indie : {
+        id: "indie",
+        name: "Indie",
+        genres: ["indie", "alternative"],
+        imagePath: indie,
+        selected: false,
+    },
+    metal : {
+        id: "metal",
+        name: "Metal",
+        genres: ["metal", "heavy-metal"],
+        imagePath: metal,
+        selected: false,
+    },
+    jazzAndBlues : {
+        id: "jazzAndBlues",
+        name: "Jazz & Blues",
+        genres: ["jazz", "blues"],
+        imagePath: jazz,
+        selected: false,
+    },
+    hipHop : {
+        id: "hipHop",
+        name: "Hip Hop",
+        genres: ["hip-hop"],
+        imagePath: hipHop,
+        selected: false,
+    },
+    electronic : {
+        id: "electronic",
+        name: "Electronic",
+        genres: ["electro", "electronic", "edm"],
+        imagePath: electronic,
+        selected: false,
+    },
+    sad: {
+        id: "sad",
+        name: "Sad",
+        genres: ["rainy-day", "sad"],
+        imagePath: sad,
+        selected: false,
+    },
+    happy: {
+        id: "happy",
+        name: "Happy",
+        genres: ["happy"],
+        imagePath: happy,
+        selected: false,
+    },
+    dancey: {
+        id: "dancey",
+        name: "Dancey",
+        genres: ["dance", "pop", "party"],
+        imagePath: dancey,
+        selected: false,
+    },
+    angry: {
+        id: "angry",
+        name: "Angry",
+        genres: ["metal", "rock", "hard-rock"],
+        imagePath: angry,
+        selected: false,
+    },
+    relaxed: {
+        id: "relaxed",
+        name: "Relaxed",
+        genres: ["study", "sleep"],
+        imagePath: relaxed,
+        selected: false,
+    },
+    workout: {
+        id: "workout",
+        name: "Working Out",
+        genres: ["work-out"],
+        imagePath: workout,
+        selected: false,
+    }
+}

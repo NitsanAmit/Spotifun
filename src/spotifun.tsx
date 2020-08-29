@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react';
-import {useState} from "react";
+import React, {useEffect, useState} from 'react';
 import {AppStep} from "./models/app-consts";
 import {LoginForm} from "./login-form";
+import {GenrePicker} from "./genre-picker";
+import {Genres} from './models/genres'
+import {Genre} from "./models/Models";
 
 export const Spotifun: React.FunctionComponent = (props => {
     const [step, setStep] = useState<AppStep>(AppStep.Login);
     const [token, setToken] = useState<string>( window.sessionStorage.getItem(TOKEN_STORAGE_KEY) || '');
+    const [genresList, setGenresList] = useState<{[p: string] : Genre}>({...Genres});
+    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 
     useEffect(() => {
         if(token) return;
@@ -16,11 +20,30 @@ export const Spotifun: React.FunctionComponent = (props => {
         }
     });
 
+    const onItemSelect = (currId: string) => {
+        const selectedGenresCopy = selectedGenres.splice(0);
+        
+        if (!genresList[currId].selected && selectedGenresCopy.length < 2) {
+            selectedGenresCopy.push(currId);
+            genresList[currId].selected = !genresList[currId].selected;
+        }
+        else if (genresList[currId].selected) {
+            genresList[currId].selected = !genresList[currId].selected;
+            const index = selectedGenres.indexOf(currId);
+            selectedGenresCopy.splice(index, 1);
+        }
+        setSelectedGenres(selectedGenresCopy);
+    }
+
     return (
         <div style={{alignItems: "center", textAlign: "center"}} >
             {
                 step === AppStep.Login && <LoginForm/>
             }
+            {
+                step === AppStep.GenresSelection && <GenrePicker genres={genresList} onItemSelect={onItemSelect}/>
+            }
+
         </div>
     )
 })
