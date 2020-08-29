@@ -4,59 +4,34 @@ import {LoginForm} from "./login-form";
 import {GenrePicker} from "./genre-selection/genre-picker";
 import {SpotifyApi} from "./spotifyApi";
 import {GenreStore} from "./genre-selection/genre-store";
-import {AppButton} from "./app-button";
+import {AuthService} from "./auth-service";
 import {observer} from "mobx-react";
 
-export const Spotifun: React.FunctionComponent = observer((props => {
-    const [step, setStep] = useState<AppStep>(AppStep.Login);
-    const [token, setToken] = useState<string>(window.sessionStorage.getItem(TOKEN_STORAGE_KEY) || '');
+export const Spotifun: React.FunctionComponent = observer((() => {
+
+    const [authService] = useState<AuthService>(new AuthService());
+    const [step, setStep] = useState<AppStep>(AppStep.GenresSelection);
     const [genreStore] = useState<GenreStore>(new GenreStore());
     const [spotifyApi, setSpotifyApi] = useState<SpotifyApi>();
 
     useEffect(() => {
-        if (token) return;
-        const _token = hash.access_token;
-        if (_token) {
-            window.sessionStorage.setItem(TOKEN_STORAGE_KEY, _token);
-            setToken(_token);
+        if (authService.hasToken) {
+            setSpotifyApi(new SpotifyApi(authService.token));
         }
-    });
-
-    useEffect(() => {
-        if (token) {
-            setSpotifyApi(new SpotifyApi(token));
-            setStep(AppStep.GenresSelection); //TODO solve edge cases (token refresh, token present on useState init)
-        }
-    }, [token]);
-
+    }, [authService.hasToken, authService.token])
 
     return (
         <div style={{alignItems: "center", textAlign: "center"}}>
             {
-                step === AppStep.Login && <LoginForm />
-            }
-            {
-                step === AppStep.GenresSelection && <>
-                <GenrePicker genreStore={genreStore}/>
-                <AppButton label="Proceed to artists selection >"
-                           disabled={!genreStore.selectionComplete}
-                           onButtonClick={() => { if (genreStore.selectionComplete) setStep(AppStep.ArtistsSelection)}}/>
-                </>
+                authService.hasToken ?
+                    <>
+                        {
+                            step === AppStep.GenresSelection &&
+                            <GenrePicker genreStore={genreStore} onFinish={() => setStep(AppStep.ArtistsSelection)}/>
+                        }
+                    </>
+                    : <LoginForm/>
             }
         </div>
     )
 }))
-
-const hash: { access_token: string } = window.location.hash.substring(1).split("&").reduce(function (hashParams, item) {
-    if (item) {
-        const parts = item.split("=");
-        // @ts-ignore
-        hashParams[parts[0]] = decodeURIComponent(parts[1]);
-    }
-    return hashParams;
-}, {access_token: ""});
-
-window.location.hash = "";
-
-
-const TOKEN_STORAGE_KEY = "token";

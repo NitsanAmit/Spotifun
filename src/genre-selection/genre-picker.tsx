@@ -2,8 +2,10 @@ import React from "react";
 import {GenreSelectionBox} from "./genre-selection-box";
 import "../pickers.css"
 import {GenreStore} from "./genre-store";
+import {AppButton} from "../app-button";
+import {observer} from "mobx-react";
 
-export const GenrePicker: React.FunctionComponent<{ genreStore: GenreStore }> = ({genreStore}) => {
+export const GenrePicker: React.FunctionComponent<{ genreStore: GenreStore; onFinish: () => void }> = observer(({genreStore, onFinish}) => {
 
     return (
         <>
@@ -19,6 +21,9 @@ export const GenrePicker: React.FunctionComponent<{ genreStore: GenreStore }> = 
                         />)
                 }
             </div>
+            <AppButton label="Proceed to artists selection >"
+                       disabled={!genreStore.selectionComplete}
+                       onButtonClick={onFinish}/>
         </>
     )
-};
+});
