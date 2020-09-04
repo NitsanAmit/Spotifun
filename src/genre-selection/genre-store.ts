@@ -1,4 +1,4 @@
-import {Genre} from "../models/Models";
+import {Genre} from "../models/entity-models";
 import {computed, observable} from "mobx";
 import {Genres} from "../models/genres";
 
@@ -17,7 +17,7 @@ export class GenreStore {
         return this.selectedGenres.length === this.REQUIRED_SELECTION;
     }
 
-    onItemSelect = (currId: string) => {
+    public onItemSelect = (currId: string) => {
         if (!this.allGenres[currId].selected && this.selectedGenres.length < this.REQUIRED_SELECTION) {
             this.selectedGenres.push(currId);
             this.allGenres[currId].selected = !this.allGenres[currId].selected;
