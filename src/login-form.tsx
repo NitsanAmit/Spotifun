@@ -1,7 +1,7 @@
 import React from "react";
-import {AppButton} from "./app-button";
 import {LoginConsts} from "./models/app-consts";
-import {InformationPanel} from "./info-panel";
+import {InformationPanel} from "./shared-components/info-panel";
+import {AppButton} from "./shared-components/app-button";
 
 
 export const LoginForm: React.FunctionComponent = () => {
