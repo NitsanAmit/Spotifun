@@ -98,7 +98,7 @@ export const Genres: {[key: string]: Genre} = {
     workout: {
         id: "workout",
         name: "Working Out",
-        genres: ["work-out"],
+        genres: ["work-out", "workout"],
         image: workout,
         selected: false,
     }

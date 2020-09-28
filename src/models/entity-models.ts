@@ -19,6 +19,7 @@ export interface Track {
     id: string;
     name: string;
     artists: {
+        id: string;
         link: string;
         name: string;
         href: string;
