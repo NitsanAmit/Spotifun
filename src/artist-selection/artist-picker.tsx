@@ -1,25 +1,33 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {ArtistSelectionBox} from "./artist-selection-box";
 import "../pickers.css"
 import {ArtistStore} from "./artist-store";
-import {SpotifyApi} from "../spotify.api";
+import {SpotifyApi} from "../networking/spotify.api";
 import {AppButton} from "../shared-components/app-button";
 import {observer} from "mobx-react";
+import {InformationPanel} from "../shared-components/info-panel";
+import {LocaleContext} from "../spotifun";
 
 export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, selectedGenres, onFinish}) => {
 
     const [artistStore, setArtistStore] = useState<ArtistStore>();
+    const strings = useContext(LocaleContext);
 
     useEffect(() => {
         setArtistStore(new ArtistStore(spotifyApi, selectedGenres));
-    }, []);
+    }, [selectedGenres, spotifyApi]);
 
     return (
         <>
             {
                 artistStore ?
                     <>
-                        <h2>Pick your Artists:</h2>
+                        {
+                            artistStore.isFromRecommendation &&
+                            <InformationPanel title={strings.artists_picker_info_box_title}
+                                              description={strings.artists_picker_info_box_content}/>
+                        }
+                        <h2>{strings.artists_picker_title}</h2>
                         <div className="picker-container">
                             {
                                 Object.keys(artistStore.artistsByGenre).map((artistId: string) =>
@@ -31,9 +39,10 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
                                     />)
                             }
                         </div>
-                        <AppButton label="Proceed to artists selection >"
-                                   disabled={!artistStore.selectionComplete}
-                                   onButtonClick={() => onFinish(artistStore.selectedArtists)}/>
+                        <AppButton
+                            label={artistStore.selectionComplete ? strings.artists_picker_proceed_button_enabled : strings.artists_picker_proceed_button_disabled}
+                            disabled={!artistStore.selectionComplete}
+                            onButtonClick={() => onFinish(artistStore.selectedArtists)}/>
                     </>
                     : <h2>Loading...</h2>
             }

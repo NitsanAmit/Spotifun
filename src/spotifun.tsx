@@ -1,10 +1,19 @@
 import React from 'react';
-import {AuthService} from "./auth-service";
+import {AuthService} from "./networking/auth-service";
 import {PlaylistCreator} from "./playlist-creator";
+import {DeclaredStrings, LocaleService} from "./i18n/locale-service";
 
-export const Spotifun: React.FunctionComponent = (() => {
+export const Spotifun: React.FunctionComponent<SpotifunProps> = (({localeService, authService}) =>
+    <LocaleContext.Provider value={localeService.strings}>
+        {
+            Object.keys(localeService.strings).length !== 0 &&
+            <PlaylistCreator authService={authService}/>
+        }
+    </LocaleContext.Provider>)
 
-    const authService = new AuthService();
+interface SpotifunProps {
+    localeService: LocaleService;
+    authService: AuthService;
+}
 
-    return <PlaylistCreator authService={authService}/>
-})
+export const LocaleContext = React.createContext<DeclaredStrings>({} as DeclaredStrings);

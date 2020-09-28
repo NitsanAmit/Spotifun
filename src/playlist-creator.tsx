@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {observer} from "mobx-react";
 import {AppStep} from "./models/app-consts";
-import {SpotifyApi} from "./spotify.api";
+import {SpotifyApi} from "./networking/spotify.api";
 import {GenrePicker} from "./genre-selection/genre-picker";
-import {LoginForm} from "./login-form";
-import {AuthService} from "./auth-service";
+import {LoginForm} from "./login-page/login-form";
+import {AuthService} from "./networking/auth-service";
 import {ArtistPicker} from "./artist-selection/artist-picker";
 
-export const PlaylistCreator: React.FunctionComponent<{authService: AuthService}> = observer((({authService}) => {
+export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService }> = observer((({authService}) => {
 
     const [step, setStep] = useState<AppStep>(AppStep.GenresSelection);
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
@@ -28,6 +28,9 @@ export const PlaylistCreator: React.FunctionComponent<{authService: AuthService}
     const onArtistSelect = (artists: string[]) => {
         setSelectedArtists(artists);
         setStep(AppStep.PlaylistReview);
+        spotifyApi?.getRecommendations(selectedGenres, selectedArtists).then(recommendations => {
+            console.log(recommendations); //TODO display playlist
+        });
     }
 
     return (
@@ -41,10 +44,11 @@ export const PlaylistCreator: React.FunctionComponent<{authService: AuthService}
                         }
                         {
                             step === AppStep.ArtistsSelection &&
-                            <ArtistPicker spotifyApi={spotifyApi} selectedGenres={selectedGenres} onFinish={onArtistSelect}/>
+                            <ArtistPicker spotifyApi={spotifyApi} selectedGenres={selectedGenres}
+                                          onFinish={onArtistSelect}/>
                         }
                     </>
-                    : <LoginForm />
+                    : <LoginForm/>
             }
         </div>
     )
