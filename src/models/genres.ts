@@ -1,7 +1,7 @@
 import {Genre} from "./entity-models";
 import {pop, rock, country, indie, metal,
     jazz, hipHop, electronic, sad, happy,
-    dancey, angry, relaxed, workout} from '../static-resources/icons'
+    dancey, angry, relaxed, workout} from "../static-resources/icons";
 
 export const Genres: {[key: string]: Genre} = {
     pop : {
@@ -14,7 +14,7 @@ export const Genres: {[key: string]: Genre} = {
     rock : {
         id: "rock",
         name: "Rock",
-        genres: ["rock", "hard-rock"],
+        genres: ["rock", "hard-rock","rock-n-roll"],
         image: rock,
         selected: false,
     },
@@ -56,7 +56,7 @@ export const Genres: {[key: string]: Genre} = {
     electronic : {
         id: "electronic",
         name: "Electronic",
-        genres: ["electro", "electronic"],
+        genres: ["electro", "electronic", "edm"],
         image: electronic,
         selected: false,
     },
@@ -77,14 +77,14 @@ export const Genres: {[key: string]: Genre} = {
     dancey: {
         id: "dancey",
         name: "Dancey",
-        genres: ["dance", "party"],
+        genres: ["dance", "pop", "party"],
         image: dancey,
         selected: false,
     },
     angry: {
         id: "angry",
         name: "Angry",
-        genres: ["metal", "hard-rock"],
+        genres: ["metal", "rock", "hard-rock"],
         image: angry,
         selected: false,
     },
