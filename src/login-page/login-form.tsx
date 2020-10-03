@@ -4,10 +4,8 @@ import {InformationPanel} from "../shared-components/info-panel";
 import {AppButton} from "../shared-components/app-button";
 import {LocaleContext} from "../spotifun";
 
-
 export const LoginForm: React.FunctionComponent = () => {
     const strings = useContext(LocaleContext);
-
     return (
         <>
             <InformationPanel title={strings.login_form_info_box_title} description={strings.login_form_info_box_content}/>

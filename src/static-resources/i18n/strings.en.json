@@ -7,5 +7,8 @@
   "artists_picker_proceed_button_enabled": "Make me a killer playlist already!!!",
   "artists_picker_proceed_button_disabled": "Select more artists to continue",
   "login_form_info_box_title": "Hello!",
-  "login_form_info_box_content": "Please login to enjoy our amazing applicatzyush"
+  "login_form_info_box_content": "Please login to enjoy our amazing applicatzyush",
+  "playlist_item_heart_button_alt": "Add this song to your library",
+  "playlist_item_album_image_alt": "album art",
+  "playlist_item_album_image_play_button_alt": "play preview"
 }

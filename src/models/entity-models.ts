@@ -2,9 +2,11 @@
 export interface Artist {
     id: string;
     name: string;
-    genres: string[];
-    image: string;
-    selected: boolean;
+    genres?: string[];
+    image?: string;
+    selected?: boolean;
+    apiUrl?: string;
+    externalUrl?: string;
 }
 
 export interface Genre {
@@ -18,13 +20,16 @@ export interface Genre {
 export interface Track {
     id: string;
     name: string;
-    artists: {
-        id: string;
-        link: string;
-        name: string;
-        href: string;
-    }[];
-    image: string;
-    albumName: string;
+    album: Album;
+    artists: Artist[];
+    duration: number;
+    externalUrl: string;
+    previewUrl: string;
 }
 
+export interface Album {
+    id: string;
+    name: string;
+    image: string;
+    externalUrl: string;
+}

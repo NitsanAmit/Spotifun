@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
+import "../styles/pickers.css"
 import {ArtistSelectionBox} from "./artist-selection-box";
-import "../pickers.css"
 import {ArtistStore} from "./artist-store";
 import {SpotifyApi} from "../networking/spotify.api";
 import {AppButton} from "../shared-components/app-button";
@@ -48,6 +48,7 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
             }
         </>
     )
+    //TODO add a slider to choose the amount of songs you wish to get in the created playlist, and pass as limit to getRecommendations
 });
 
 interface ArtistPickerProps {

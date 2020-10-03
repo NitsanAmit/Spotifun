@@ -32,7 +32,7 @@ export class ArtistStore {
                 artists.reduce((accumulator: { [key: string]: Artist }, curArtist) => {
                     for (const genre of this.selectedGenres) {
                         for (const genreId of Genres[genre].genres) {
-                            if (curArtist.genres.join(" ").includes(genreId)) {
+                            if (curArtist.genres?.join(" ").includes(genreId)) {
                                 accumulator[curArtist.id] = curArtist;
                             }
                         }

@@ -6,30 +6,31 @@ import {GenrePicker} from "./genre-selection/genre-picker";
 import {LoginForm} from "./login-page/login-form";
 import {AuthService} from "./networking/auth-service";
 import {ArtistPicker} from "./artist-selection/artist-picker";
+import {PlaylistReview} from "./playlist-review/playlist-review";
+import {Track} from "./models/entity-models";
 
 export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService }> = observer((({authService}) => {
 
     const [step, setStep] = useState<AppStep>(AppStep.GenresSelection);
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-    const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
+    const [tracks, setTracks] = useState<Track[]>([]);
     const [spotifyApi, setSpotifyApi] = useState<SpotifyApi>();
 
     useEffect(() => {
         if (authService.token) {
             setSpotifyApi(new SpotifyApi(authService.token, authService.refreshAuthToken));
         }
-    }, [authService.token])
+    }, [authService.refreshAuthToken, authService.token])
 
     const onGenreSelect = (genres: string[]) => {
         setSelectedGenres(genres);
         setStep(AppStep.ArtistsSelection);
     }
 
-    const onArtistSelect = (artists: string[]) => {
-        setSelectedArtists(artists);
+    const onArtistSelect = async (artists: string[]) => {
         setStep(AppStep.PlaylistReview);
-        spotifyApi?.getRecommendations(selectedGenres, selectedArtists).then(recommendations => {
-            console.log(recommendations); //TODO display playlist
+        spotifyApi?.getRecommendations(selectedGenres, artists).then(recommendations => {
+            setTracks(recommendations);
         });
     }
 
@@ -46,6 +47,10 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                             step === AppStep.ArtistsSelection &&
                             <ArtistPicker spotifyApi={spotifyApi} selectedGenres={selectedGenres}
                                           onFinish={onArtistSelect}/>
+                        }
+                        {
+                            step === AppStep.PlaylistReview &&
+                            <PlaylistReview spotifyApi={spotifyApi} tracks={tracks}/>
                         }
                     </>
                     : <LoginForm/>

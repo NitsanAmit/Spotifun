@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {Spotifun} from "./spotifun";
-import {LocaleService} from "./i18n/locale-service";
+import {LocaleService} from "./static-resources/i18n/locale-service";
 import {AuthService} from "./networking/auth-service";
 
 const APP_LOCALE = "en" // TODO maybe we'd like to support other languages in the future...
