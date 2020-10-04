@@ -1,11 +1,11 @@
 import React from "react";
 import {PlaylistItem} from "./playlist-item";
-import {Track} from "../models/entity-models";
-import {SpotifyApi} from "../networking/spotify.api";
 import * as Styled from "./playlist-review-styles";
+import {PlaylistReviewStore} from "./playlist-review-store";
+import {observer} from "mobx-react";
 
 
-export const PlaylistReviewTable: React.FunctionComponent<PlaylistReviewTableProps> = ({tracks, spotifyApi}) => {
+export const PlaylistReviewTable: React.FunctionComponent<PlaylistReviewTableProps> = observer(({playlistReviewStore}) => {
 
     return (
         <Styled.PlaylistTable>
@@ -20,14 +20,15 @@ export const PlaylistReviewTable: React.FunctionComponent<PlaylistReviewTablePro
             </thead>
             <tbody>
             {
-                tracks.map(track => <PlaylistItem key={track.id} track={track} spotifyApi={spotifyApi}/>)
+                playlistReviewStore.tracks.map(track => <PlaylistItem key={track.id}
+                                                                      playlistReviewStore={playlistReviewStore}
+                                                                      track={track} />)
             }
             </tbody>
         </Styled.PlaylistTable>
     )
-}
+});
 
 export interface PlaylistReviewTableProps {
-    spotifyApi: SpotifyApi;
-    tracks: Track[];
+    playlistReviewStore: PlaylistReviewStore;
 }

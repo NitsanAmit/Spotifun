@@ -1,4 +1,4 @@
-import {Artist} from "../models/entity-models";
+import {Artist, Track} from "../models/entity-models";
 import {Genres} from "../models/genres";
 import {convertArtistsToAppObject, convertTracksToAppObject, shuffle} from "./networking.helper";
 
@@ -36,7 +36,7 @@ export class SpotifyApi {
             });
     }
 
-    getRecommendations = (genres?: string[], artists?: string[], retry = false): Promise<any> => {
+    getRecommendations = (genres?: string[], artists?: string[], retry = false): Promise<Track[]> => {
         const baseUrl = "https://api.spotify.com/v1/recommendations";
         const spotifyGenres = genres ? this.getSpotifyGenres(genres, true) : undefined;
         const queryParams = this.getQueryString({"seed_genres": spotifyGenres, "seed_artists": artists});
@@ -88,7 +88,7 @@ export class SpotifyApi {
             .then(response => response.artists.items);
     }
 
-    getQueryString = (params: { [key: string]: string[] | undefined }) => {
+    getQueryString = (params: { [key: string]: string[] | undefined }): string => {
         const query = [];
         for (const param in params) {
             const value = params[param];
@@ -97,7 +97,7 @@ export class SpotifyApi {
         return query.join('&');
     }
 
-    getSpotifyGenres = (genres: string[], trim = false) => {
+    getSpotifyGenres = (genres: string[], trim = false): string[] => {
         return genres.reduce((acc, cur) => {
             const spotifyGenres = Genres[cur].genres;
             if (trim) {
@@ -108,14 +108,47 @@ export class SpotifyApi {
         }, [] as string[]);
     }
 
-    //TODO implement
-    removeFromUserLibrary = async (trackId: string) => {
-        return;
+    checkUserSavedTracks = (tracksIds: string[]): Promise<boolean[]> => {
+        const baseUrl = "https://api.spotify.com/v1/me/tracks/contains";
+        const queryParams = this.getQueryString({"ids": tracksIds});
+        return fetch(`${baseUrl}?${queryParams}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': "Bearer " + this.token,
+                },
+            })
+            .then(response => {
+                if (response.status !== 200) {
+                    throw "fetch unsuccessful";
+                }
+                return response.json();
+            });
     }
 
-    //TODO implement
-    addToUserLibrary = async (trackId: string) => {
-        return;
+    removeFromUserLibrary = (trackId: string): Promise<void> => {
+        return this.changeSaveStatus(trackId, 'DELETE');
+    }
+
+    addToUserLibrary = (trackId: string): Promise<void> => {
+        return this.changeSaveStatus(trackId, 'PUT');
+    }
+
+    changeSaveStatus = (trackId: string, method: 'PUT' | 'DELETE'): Promise<void> => {
+        const baseUrl = "https://api.spotify.com/v1/me/tracks";
+        const queryParams = this.getQueryString({"ids": [trackId]});
+        return fetch(`${baseUrl}?${queryParams}`,
+            {
+                method,
+                headers: {
+                    'Authorization': "Bearer " + this.token,
+                },
+            })
+            .then(response => {
+                if (response.status !== 200) {
+                    throw "fetch unsuccessful";
+                }
+            });
     }
 
 

@@ -21,8 +21,10 @@ export interface LinkProps {
 }
 
 const StyledContainer = styled.div`
-    display: inline-block;
+    display: inline;
     white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
 `,
     StyledLink = styled.a`
     text-decoration: none;

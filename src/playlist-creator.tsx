@@ -7,13 +7,12 @@ import {LoginForm} from "./login-page/login-form";
 import {AuthService} from "./networking/auth-service";
 import {ArtistPicker} from "./artist-selection/artist-picker";
 import {PlaylistReview} from "./playlist-review/playlist-review";
-import {Track} from "./models/entity-models";
 
 export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService }> = observer((({authService}) => {
 
     const [step, setStep] = useState<AppStep>(AppStep.GenresSelection);
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-    const [tracks, setTracks] = useState<Track[]>([]);
+    const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
     const [spotifyApi, setSpotifyApi] = useState<SpotifyApi>();
 
     useEffect(() => {
@@ -28,10 +27,8 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
     }
 
     const onArtistSelect = async (artists: string[]) => {
+        setSelectedArtists(artists);
         setStep(AppStep.PlaylistReview);
-        spotifyApi?.getRecommendations(selectedGenres, artists).then(recommendations => {
-            setTracks(recommendations);
-        });
     }
 
     return (
@@ -50,7 +47,10 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                         }
                         {
                             step === AppStep.PlaylistReview &&
-                            <PlaylistReview spotifyApi={spotifyApi} tracks={tracks}/>
+                            <PlaylistReview spotifyApi={spotifyApi}
+                                            selectedGenres={selectedGenres}
+                                            selectedArtists={selectedArtists}
+                            />
                         }
                     </>
                     : <LoginForm/>

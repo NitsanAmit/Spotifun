@@ -2,23 +2,23 @@ import React, {useContext, useRef} from "react";
 import playIcon from '../static-resources/icons/play_icon.png'
 import * as Styled from "./playlist-review-styles";
 import {LocaleContext} from "../spotifun";
+import {PlaylistReviewStore} from "./playlist-review-store";
+import {Track} from "../models/entity-models";
 
-export const PlaylistItemAlbumImage: React.FunctionComponent<PlaylistItemProps> = (props) => {
+export const PlaylistItemAlbumImage: React.FunctionComponent<PlaylistItemProps> = ({track, playlistReviewStore}) => {
 
+    const {album, previewUrl, id} = track;
     const strings = useContext(LocaleContext);
-    const {image, previewUrl} = props;
     const audio = useRef<HTMLAudioElement>(null);
 
     const playPreview = () => {
-        if (!audio) return;
-        if (!audio.current?.paused && !audio.current?.ended) return audio.current?.pause();
-        //TODO if another audio is currently playing in parent - pause it before playing
-        audio.current?.play();
+        if (!audio?.current) return;
+        playlistReviewStore.playPreview(audio.current, id);
     }
 
     return (
-        <Styled.AlbumImageContainer onClick={() => playPreview()}>
-            <Styled.AlbumImage src={image} alt={strings.playlist_item_album_image_alt} {...props} />
+        <Styled.AlbumImageContainer onClick={playPreview}>
+            <Styled.AlbumImage src={album.image} alt={strings.playlist_item_album_image_alt}/>
             {
                 previewUrl &&
                 <>
@@ -34,6 +34,6 @@ export const PlaylistItemAlbumImage: React.FunctionComponent<PlaylistItemProps> 
 }
 
 export interface PlaylistItemProps {
-    image: string;
-    previewUrl: string;
+    track: Track;
+    playlistReviewStore: PlaylistReviewStore;
 }

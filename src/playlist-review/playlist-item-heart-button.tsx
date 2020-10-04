@@ -1,37 +1,25 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import fullHeart from "../static-resources/icons/heart-solid.svg";
 import emptyHeart from "../static-resources/icons/heart-regular.svg";
-import styled from "@emotion/styled";
-import {SpotifyApi} from "../networking/spotify.api";
 import {LocaleContext} from "../spotifun";
+import {Track} from "../models/entity-models";
+import { StyledHeartButton } from "./playlist-review-styles";
+import {observer} from "mobx-react";
 
-export const PlaylistItemHeartButton: React.FunctionComponent<PlaylistItemHeartButtonProps> = ({trackId, spotifyApi}) => {
+export const PlaylistItemHeartButton: React.FunctionComponent<PlaylistItemHeartButtonProps> = observer(({track, onHeartClick}) => {
 
-    const [inUserLibrary, setInUserLibrary] = useState<boolean>(); // TODO fetch song current like status
     const strings = useContext(LocaleContext);
-
-    const toggleLikeStatus = async (): Promise<void> => {
-        inUserLibrary ?
-            await spotifyApi.removeFromUserLibrary(trackId) :
-            await spotifyApi.addToUserLibrary(trackId); //TODO
-        setInUserLibrary(!inUserLibrary)
-    }
 
     return (
         <StyledHeartButton
-            src={inUserLibrary ? fullHeart : emptyHeart}
+            src={track.inUserLibrary ? fullHeart : emptyHeart}
             alt={strings.playlist_item_heart_button_alt}
-            onClick={() => toggleLikeStatus()}
+            onClick={() => onHeartClick(track.id)}
         />
     );
-}
+});
 
 interface PlaylistItemHeartButtonProps {
-    trackId: string;
-    spotifyApi: SpotifyApi;
+    track: Track;
+    onHeartClick: (trackId: string) => void;
 }
-
-const StyledHeartButton = styled.img`
-    height: 32px;
-    filter: invert(74%) sepia(60%) saturate(4555%) hue-rotate(318deg) brightness(109%) contrast(114%);
-`;

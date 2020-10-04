@@ -25,6 +25,7 @@ export interface Track {
     duration: number;
     externalUrl: string;
     previewUrl: string;
+    inUserLibrary?: boolean;
 }
 
 export interface Album {

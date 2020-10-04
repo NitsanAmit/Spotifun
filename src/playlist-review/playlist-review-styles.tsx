@@ -6,16 +6,17 @@ import styled from "styled-components";
  * PlaylistReviewTable styles:
  */
 const BlankCell = (props: {width: number} & React.ThHTMLAttributes<HTMLTableHeaderCellElement>) => <th {...props} />
+export const PLAYLIST_REVIEW_TABLE_BACKGROUND_COLOR = "#fefefe";
 const baseTableHeader = `
     border-radius: 25px;
     border: 1px solid #dedede;
     box-shadow: #d0d0d0 2px 2px 3px 0px;
-    background: #fefefe;
+    background: ${PLAYLIST_REVIEW_TABLE_BACKGROUND_COLOR};
     margin: auto 8px;
     padding: 8px;
 `;
 export const PlaylistTable = styled.table`
-    width: 75%;
+    width: 70%;
     margin: 8px auto;
     text-align: center;
 `,
@@ -45,22 +46,22 @@ export const PlaylistItemRow = styled.tr`
     border-radius: 35px;
     border: 1px solid #dedede;
     box-shadow: #d0d0d0 2px 2px 3px 0px;
-    background: #fefefe;
+    background: ${PLAYLIST_REVIEW_TABLE_BACKGROUND_COLOR};
     padding-right: ${PLAYLIST_ITEM_PADDING}px;
 `,
     TrackNameTd = styled.td`
-    display: flex;
     width: 50%;
     margin: auto;
     padding: ${PLAYLIST_ITEM_PADDING}px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    text-align: left;
 `,
     HeartButtonTd = styled.td`
-    display: flex;
     margin: auto;
     padding: ${PLAYLIST_ITEM_PADDING}px;
+    height: 24px;
 `,
     PlaylistItemTd = styled.td`
     width: 25%;
@@ -117,4 +118,13 @@ export const AlbumImageContainer = styled.div`
     ${AlbumImageContainer}:hover & {
         display: block;
     }
+`;
+
+
+/**
+ * PlaylistItemHeartButton styles:
+ */
+export const StyledHeartButton = styled.img`
+    height: 24px;
+    filter: invert(74%) sepia(60%) saturate(4555%) hue-rotate(318deg) brightness(109%) contrast(114%);
 `;
