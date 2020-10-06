@@ -1,7 +1,7 @@
 import {Genre} from "./entity-models";
 import {pop, rock, country, indie, metal,
     jazz, hipHop, electronic, sad, happy,
-    dancey, angry, relaxed, workout} from '../icons'
+    dancey, angry, relaxed, workout} from "../static-resources/icons";
 
 export const Genres: {[key: string]: Genre} = {
     pop : {

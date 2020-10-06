@@ -1,0 +1,492 @@
+{
+  "tracks": [
+    {
+      "album": {
+        "album_type": "ALBUM",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/77SW9BnxLY8rJ0RciFqkHh"
+            },
+            "href": "https://api.spotify.com/v1/artists/77SW9BnxLY8rJ0RciFqkHh",
+            "id": "77SW9BnxLY8rJ0RciFqkHh",
+            "name": "The Neighbourhood",
+            "type": "artist",
+            "uri": "spotify:artist:77SW9BnxLY8rJ0RciFqkHh"
+          }
+        ],
+        "available_markets": [
+          "PT",
+          "PY",
+          "QA",
+          "RO",
+          "RS",
+          "RU",
+          "SA"
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/64uUQtKfndQguejYmA40lL"
+        },
+        "href": "https://api.spotify.com/v1/albums/64uUQtKfndQguejYmA40lL",
+        "id": "64uUQtKfndQguejYmA40lL",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2737177fb5667cdafd34b871257",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e027177fb5667cdafd34b871257",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048517177fb5667cdafd34b871257",
+            "width": 64
+          }
+        ],
+        "name": "I'm Sorry...",
+        "release_date": "2012-08-07",
+        "release_date_precision": "day",
+        "total_tracks": 0,
+        "type": "album",
+        "uri": "spotify:album:64uUQtKfndQguejYmA40lL"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/77SW9BnxLY8rJ0RciFqkHh"
+          },
+          "href": "https://api.spotify.com/v1/artists/77SW9BnxLY8rJ0RciFqkHh",
+          "id": "77SW9BnxLY8rJ0RciFqkHh",
+          "name": "The Neighbourhood",
+          "type": "artist",
+          "uri": "spotify:artist:77SW9BnxLY8rJ0RciFqkHh"
+        }
+      ],
+      "available_markets": [
+        "NI",
+        "NL",
+        "US",
+        "UY"
+      ],
+      "disc_number": 1,
+      "duration_ms": 240040,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "USSM11204647"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/4pGqFOfzvfe6avb9kbZicC"
+      },
+      "href": "https://api.spotify.com/v1/tracks/4pGqFOfzvfe6avb9kbZicC",
+      "id": "4pGqFOfzvfe6avb9kbZicC",
+      "is_local": false,
+      "name": "Sweater Weather",
+      "popularity": 63,
+      "preview_url": "https://p.scdn.co/mp3-preview/ff64df97746e9b97673169f97e0eb5045c552278?cid=f35da0c6ac834eea9ff0ea58f245244c",
+      "track_number": 4,
+      "type": "track",
+      "uri": "spotify:track:4pGqFOfzvfe6avb9kbZicC"
+    },
+    {
+      "album": {
+        "album_type": "ALBUM",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/6OVkHZQP8QoBYqr1ejCGDv"
+            },
+            "href": "https://api.spotify.com/v1/artists/6OVkHZQP8QoBYqr1ejCGDv",
+            "id": "6OVkHZQP8QoBYqr1ejCGDv",
+            "name": "Seasick Steve",
+            "type": "artist",
+            "uri": "spotify:artist:6OVkHZQP8QoBYqr1ejCGDv"
+          }
+        ],
+        "available_markets": [
+          "LB",
+          "LI",
+          "LT",
+          "LU",
+          "LV",
+          "MA"
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/079rT3hMFOrOH4fmdD4p59"
+        },
+        "href": "https://api.spotify.com/v1/albums/079rT3hMFOrOH4fmdD4p59",
+        "id": "079rT3hMFOrOH4fmdD4p59",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273078ba1785f13dd11d429ccc9",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02078ba1785f13dd11d429ccc9",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851078ba1785f13dd11d429ccc9",
+            "width": 64
+          }
+        ],
+        "name": "I Started Out With Nothin And I Still Got Most Of It Left",
+        "release_date": "2008-07-15",
+        "release_date_precision": "day",
+        "total_tracks": 0,
+        "type": "album",
+        "uri": "spotify:album:079rT3hMFOrOH4fmdD4p59"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/6OVkHZQP8QoBYqr1ejCGDv"
+          },
+          "href": "https://api.spotify.com/v1/artists/6OVkHZQP8QoBYqr1ejCGDv",
+          "id": "6OVkHZQP8QoBYqr1ejCGDv",
+          "name": "Seasick Steve",
+          "type": "artist",
+          "uri": "spotify:artist:6OVkHZQP8QoBYqr1ejCGDv"
+        }
+      ],
+      "available_markets": [],
+      "disc_number": 1,
+      "duration_ms": 164680,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "GBAHT0800407"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/1oKsHUHtU0jsbbBbLBQwY1"
+      },
+      "href": "https://api.spotify.com/v1/tracks/1oKsHUHtU0jsbbBbLBQwY1",
+      "id": "1oKsHUHtU0jsbbBbLBQwY1",
+      "is_local": false,
+      "name": "Walkin Man",
+      "popularity": 0,
+      "preview_url": null,
+      "track_number": 2,
+      "type": "track",
+      "uri": "spotify:track:1oKsHUHtU0jsbbBbLBQwY1"
+    },
+    {
+      "album": {
+        "album_type": "ALBUM",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/6PAt558ZEZl0DmdXlnjMgD"
+            },
+            "href": "https://api.spotify.com/v1/artists/6PAt558ZEZl0DmdXlnjMgD",
+            "id": "6PAt558ZEZl0DmdXlnjMgD",
+            "name": "Eric Clapton",
+            "type": "artist",
+            "uri": "spotify:artist:6PAt558ZEZl0DmdXlnjMgD"
+          },
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/5xLSa7l4IV1gsQfhAMvl0U"
+            },
+            "href": "https://api.spotify.com/v1/artists/5xLSa7l4IV1gsQfhAMvl0U",
+            "id": "5xLSa7l4IV1gsQfhAMvl0U",
+            "name": "B.B. King",
+            "type": "artist",
+            "uri": "spotify:artist:5xLSa7l4IV1gsQfhAMvl0U"
+          }
+        ],
+        "available_markets": [
+          "IT",
+          "JO",
+          "JP"
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/7b0Ysbudh2BH9A853EfxEu"
+        },
+        "href": "https://api.spotify.com/v1/albums/7b0Ysbudh2BH9A853EfxEu",
+        "id": "7b0Ysbudh2BH9A853EfxEu",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273c11a2f41352af5dcb2a7e31a",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02c11a2f41352af5dcb2a7e31a",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851c11a2f41352af5dcb2a7e31a",
+            "width": 64
+          }
+        ],
+        "name": "Riding With The King",
+        "release_date": "2000-06-13",
+        "release_date_precision": "day",
+        "total_tracks": 0,
+        "type": "album",
+        "uri": "spotify:album:7b0Ysbudh2BH9A853EfxEu"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/6PAt558ZEZl0DmdXlnjMgD"
+          },
+          "href": "https://api.spotify.com/v1/artists/6PAt558ZEZl0DmdXlnjMgD",
+          "id": "6PAt558ZEZl0DmdXlnjMgD",
+          "name": "Eric Clapton",
+          "type": "artist",
+          "uri": "spotify:artist:6PAt558ZEZl0DmdXlnjMgD"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/5xLSa7l4IV1gsQfhAMvl0U"
+          },
+          "href": "https://api.spotify.com/v1/artists/5xLSa7l4IV1gsQfhAMvl0U",
+          "id": "5xLSa7l4IV1gsQfhAMvl0U",
+          "name": "B.B. King",
+          "type": "artist",
+          "uri": "spotify:artist:5xLSa7l4IV1gsQfhAMvl0U"
+        }
+      ],
+      "available_markets": [
+
+        "DE",
+        "KZ",
+        "LB"
+      ],
+      "disc_number": 1,
+      "duration_ms": 251360,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "USRE10000587"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/2dAm3t3HT91qhKEgZFhzmv"
+      },
+      "href": "https://api.spotify.com/v1/tracks/2dAm3t3HT91qhKEgZFhzmv",
+      "id": "2dAm3t3HT91qhKEgZFhzmv",
+      "is_local": false,
+      "name": "Come Rain or Come Shine",
+      "popularity": 40,
+      "preview_url": "https://p.scdn.co/mp3-preview/dc4fdde0abaa54161d5a675b9f514cdfed362a61?cid=f35da0c6ac834eea9ff0ea58f245244c",
+      "track_number": 12,
+      "type": "track",
+      "uri": "spotify:track:2dAm3t3HT91qhKEgZFhzmv"
+    },
+    {
+      "album": {
+        "album_type": "ALBUM",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3iOvXCl6edW5Um0fXEBRXy"
+            },
+            "href": "https://api.spotify.com/v1/artists/3iOvXCl6edW5Um0fXEBRXy",
+            "id": "3iOvXCl6edW5Um0fXEBRXy",
+            "name": "The xx",
+            "type": "artist",
+            "uri": "spotify:artist:3iOvXCl6edW5Um0fXEBRXy"
+          }
+        ],
+        "available_markets": [
+          "PY",
+          "QA",
+          "RO"
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/2cRMVS71c49Pf5SnIlJX3U"
+        },
+        "href": "https://api.spotify.com/v1/albums/2cRMVS71c49Pf5SnIlJX3U",
+        "id": "2cRMVS71c49Pf5SnIlJX3U",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27372770e0507fc3a46e47daf95",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0272770e0507fc3a46e47daf95",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485172770e0507fc3a46e47daf95",
+            "width": 64
+          }
+        ],
+        "name": "Coexist",
+        "release_date": "2012-09-10",
+        "release_date_precision": "day",
+        "total_tracks": 0,
+        "type": "album",
+        "uri": "spotify:album:2cRMVS71c49Pf5SnIlJX3U"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3iOvXCl6edW5Um0fXEBRXy"
+          },
+          "href": "https://api.spotify.com/v1/artists/3iOvXCl6edW5Um0fXEBRXy",
+          "id": "3iOvXCl6edW5Um0fXEBRXy",
+          "name": "The xx",
+          "type": "artist",
+          "uri": "spotify:artist:3iOvXCl6edW5Um0fXEBRXy"
+        }
+      ],
+      "available_markets": [
+        "PE",
+        "PH",
+        "SV"
+      ],
+      "disc_number": 1,
+      "duration_ms": 171653,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "GBBKS1200085"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/1zuKjpp4t7BS8JPKi6mkQr"
+      },
+      "href": "https://api.spotify.com/v1/tracks/1zuKjpp4t7BS8JPKi6mkQr",
+      "id": "1zuKjpp4t7BS8JPKi6mkQr",
+      "is_local": false,
+      "name": "Angels",
+      "popularity": 65,
+      "preview_url": "https://p.scdn.co/mp3-preview/48eaa41bffe6150edfad3e1460c53c3e1fd7b467?cid=f35da0c6ac834eea9ff0ea58f245244c",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:1zuKjpp4t7BS8JPKi6mkQr"
+    },
+    {
+      "album": {
+        "album_type": "ALBUM",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/6iDaoPZVgxrTkndDCisX8F"
+            },
+            "href": "https://api.spotify.com/v1/artists/6iDaoPZVgxrTkndDCisX8F",
+            "id": "6iDaoPZVgxrTkndDCisX8F",
+            "name": "Keb' Mo'",
+            "type": "artist",
+            "uri": "spotify:artist:6iDaoPZVgxrTkndDCisX8F"
+          }
+        ],
+        "available_markets": [
+          "FI",
+          "GB",
+          "MC",
+          "MD",
+          "MK"
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/09rC6HgLbuYl74OvGdJw6t"
+        },
+        "href": "https://api.spotify.com/v1/albums/09rC6HgLbuYl74OvGdJw6t",
+        "id": "09rC6HgLbuYl74OvGdJw6t",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27324cdb58fe74725831c430533",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0224cdb58fe74725831c430533",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485124cdb58fe74725831c430533",
+            "width": 64
+          }
+        ],
+        "name": "Keb' Mo'",
+        "release_date": "1994-05-22",
+        "release_date_precision": "day",
+        "total_tracks": 0,
+        "type": "album",
+        "uri": "spotify:album:09rC6HgLbuYl74OvGdJw6t"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/6iDaoPZVgxrTkndDCisX8F"
+          },
+          "href": "https://api.spotify.com/v1/artists/6iDaoPZVgxrTkndDCisX8F",
+          "id": "6iDaoPZVgxrTkndDCisX8F",
+          "name": "Keb' Mo'",
+          "type": "artist",
+          "uri": "spotify:artist:6iDaoPZVgxrTkndDCisX8F"
+        }
+      ],
+      "available_markets": [
+        "AE",
+        "NL",
+        "OM",
+        "PE",
+        "PH"
+      ],
+      "disc_number": 1,
+      "duration_ms": 138533,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "USSM19400668"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/3tvyQCSm1QcWURgGvygvke"
+      },
+      "href": "https://api.spotify.com/v1/tracks/3tvyQCSm1QcWURgGvygvke",
+      "id": "3tvyQCSm1QcWURgGvygvke",
+      "is_local": false,
+      "name": "Am I Wrong",
+      "popularity": 47,
+      "preview_url": "https://p.scdn.co/mp3-preview/6093751a2ddef82fb28c23a0a211d3eff6d750cb?cid=f35da0c6ac834eea9ff0ea58f245244c",
+      "track_number": 8,
+      "type": "track",
+      "uri": "spotify:track:3tvyQCSm1QcWURgGvygvke"
+    }
+  ],
+  "seeds": [
+    {
+      "initialPoolSize": 563,
+      "afterFilteringSize": 313,
+      "afterRelinkingSize": 313,
+      "id": "jazz",
+      "type": "GENRE",
+      "href": null
+    },
+    {
+      "initialPoolSize": 1000,
+      "afterFilteringSize": 313,
+      "afterRelinkingSize": 313,
+      "id": "blues",
+      "type": "GENRE",
+      "href": null
+    },
+    {
+      "initialPoolSize": 1000,
+      "afterFilteringSize": 313,
+      "afterRelinkingSize": 313,
+      "id": "study",
+      "type": "GENRE",
+      "href": null
+    },
+    {
+      "initialPoolSize": 1000,
+      "afterFilteringSize": 313,
+      "afterRelinkingSize": 313,
+      "id": "sleep",
+      "type": "GENRE",
+      "href": null
+    }
+  ]
+}

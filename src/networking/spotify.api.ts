@@ -1,6 +1,6 @@
-import {Artist} from "../models/entity-models";
+import {Artist, Track} from "../models/entity-models";
 import {Genres} from "../models/genres";
-import {convertArtistsToAppObject, shuffle} from "./networking.helper";
+import {convertArtistsToAppObject, convertTracksToAppObject, shuffle} from "./networking.helper";
 
 export class SpotifyApi {
 
@@ -36,9 +36,9 @@ export class SpotifyApi {
             });
     }
 
-    getRecommendations = (genres?: string[], artists?: string[], retry = false): Promise<any> => {
+    getRecommendations = (genres?: string[], artists?: string[], retry = false): Promise<Track[]> => {
         const baseUrl = "https://api.spotify.com/v1/recommendations";
-        const spotifyGenres = genres ? this.getSpotifyGenres(genres) : undefined;
+        const spotifyGenres = genres ? this.getSpotifyGenres(genres, true) : undefined;
         const queryParams = this.getQueryString({"seed_genres": spotifyGenres, "seed_artists": artists});
         return fetch(`${baseUrl}?${queryParams}`,
             {
@@ -54,6 +54,7 @@ export class SpotifyApi {
                 return response.json();
             })
             .then(response => response.tracks)
+            .then((tracks) => convertTracksToAppObject(tracks))
             .catch(() => {
                 if (retry) {
                     return Promise.reject("Error getting recommendations");
@@ -63,8 +64,9 @@ export class SpotifyApi {
     }
 
     getRecommendedArtistsForGenres = (genres: string[]): Promise<Artist[]> => {
+        const searchPromises = this.getSpotifyGenres(genres).map(genre => this.search(`genre:"${genre}"`));
         return Promise
-            .all(this.getSpotifyGenres(genres).map(genre => this.search(`genre:"${genre}"`)))
+            .all(searchPromises)
             .then((response: Artist[][]) => convertArtistsToAppObject(shuffle(response.flat(1))));
     }
 
@@ -86,7 +88,7 @@ export class SpotifyApi {
             .then(response => response.artists.items);
     }
 
-    getQueryString = (params: { [key: string]: string[] | undefined }) => {
+    getQueryString = (params: { [key: string]: string[] | undefined }): string => {
         const query = [];
         for (const param in params) {
             const value = params[param];
@@ -95,8 +97,59 @@ export class SpotifyApi {
         return query.join('&');
     }
 
-    getSpotifyGenres = (genres: string[]) => {
-        return genres.reduce((acc, cur) => acc.concat(Genres[cur].genres), [] as string[]);
+    getSpotifyGenres = (genres: string[], trim = false): string[] => {
+        return genres.reduce((acc, cur) => {
+            const spotifyGenres = Genres[cur].genres;
+            if (trim) {
+                return acc.concat([spotifyGenres[0]]); // only take the first genre
+            } else {
+                return acc.concat(spotifyGenres);
+            }
+        }, [] as string[]);
     }
+
+    checkUserSavedTracks = (tracksIds: string[]): Promise<boolean[]> => {
+        const baseUrl = "https://api.spotify.com/v1/me/tracks/contains";
+        const queryParams = this.getQueryString({"ids": tracksIds});
+        return fetch(`${baseUrl}?${queryParams}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Authorization': "Bearer " + this.token,
+                },
+            })
+            .then(response => {
+                if (response.status !== 200) {
+                    throw "fetch unsuccessful";
+                }
+                return response.json();
+            });
+    }
+
+    removeFromUserLibrary = (trackId: string): Promise<void> => {
+        return this.changeSaveStatus(trackId, 'DELETE');
+    }
+
+    addToUserLibrary = (trackId: string): Promise<void> => {
+        return this.changeSaveStatus(trackId, 'PUT');
+    }
+
+    changeSaveStatus = (trackId: string, method: 'PUT' | 'DELETE'): Promise<void> => {
+        const baseUrl = "https://api.spotify.com/v1/me/tracks";
+        const queryParams = this.getQueryString({"ids": [trackId]});
+        return fetch(`${baseUrl}?${queryParams}`,
+            {
+                method,
+                headers: {
+                    'Authorization': "Bearer " + this.token,
+                },
+            })
+            .then(response => {
+                if (response.status !== 200) {
+                    throw "fetch unsuccessful";
+                }
+            });
+    }
+
 
 }

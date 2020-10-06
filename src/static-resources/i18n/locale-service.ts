@@ -18,4 +18,7 @@ export interface DeclaredStrings {
     artists_picker_proceed_button_disabled: string;
     login_form_info_box_title: string;
     login_form_info_box_content: string;
+    playlist_item_heart_button_alt: string;
+    playlist_item_album_image_alt: string;
+    playlist_item_album_image_play_button_alt: string;
 }

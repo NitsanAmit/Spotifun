@@ -4,7 +4,8 @@ import {Genres} from "../models/genres";
 
 export class GenreStore {
 
-    private readonly REQUIRED_SELECTION = 2;
+    private readonly MAX_SELECTION = 2;
+    private readonly MIN_SELECTION = 1;
 
     @observable
     allGenres: { [key: string]: Genre } = {...Genres};
@@ -14,11 +15,11 @@ export class GenreStore {
 
     @computed
     get selectionComplete(): boolean {
-        return this.selectedGenres.length === this.REQUIRED_SELECTION;
+        return this.selectedGenres.length >= this.MIN_SELECTION;
     }
 
     public onItemSelect = (currId: string) => {
-        if (!this.allGenres[currId].selected && this.selectedGenres.length < this.REQUIRED_SELECTION) {
+        if (!this.allGenres[currId].selected && this.selectedGenres.length < this.MAX_SELECTION) {
             this.selectedGenres.push(currId);
             this.allGenres[currId].selected = !this.allGenres[currId].selected;
         } else if (this.allGenres[currId].selected) {

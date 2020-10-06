@@ -1,7 +1,5 @@
 import React, {CSSProperties, Dispatch, useState} from 'react';
 
-
-
 export const InformationPanel: React.FunctionComponent<InformationPanelProps> = ({title, description, canDismiss = false}) => {
 
     const [dismissed, setDismissed] = useState<boolean>(false);

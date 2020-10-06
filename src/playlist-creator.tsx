@@ -6,6 +6,7 @@ import {GenrePicker} from "./genre-selection/genre-picker";
 import {LoginForm} from "./login-page/login-form";
 import {AuthService} from "./networking/auth-service";
 import {ArtistPicker} from "./artist-selection/artist-picker";
+import {PlaylistReview} from "./playlist-review/playlist-review";
 
 export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService }> = observer((({authService}) => {
 
@@ -18,19 +19,16 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
         if (authService.token) {
             setSpotifyApi(new SpotifyApi(authService.token, authService.refreshAuthToken));
         }
-    }, [authService.token])
+    }, [authService.refreshAuthToken, authService.token])
 
     const onGenreSelect = (genres: string[]) => {
         setSelectedGenres(genres);
         setStep(AppStep.ArtistsSelection);
     }
 
-    const onArtistSelect = (artists: string[]) => {
+    const onArtistSelect = async (artists: string[]) => {
         setSelectedArtists(artists);
         setStep(AppStep.PlaylistReview);
-        spotifyApi?.getRecommendations(selectedGenres, selectedArtists).then(recommendations => {
-            console.log(recommendations); //TODO display playlist
-        });
     }
 
     return (
@@ -46,6 +44,13 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                             step === AppStep.ArtistsSelection &&
                             <ArtistPicker spotifyApi={spotifyApi} selectedGenres={selectedGenres}
                                           onFinish={onArtistSelect}/>
+                        }
+                        {
+                            step === AppStep.PlaylistReview &&
+                            <PlaylistReview spotifyApi={spotifyApi}
+                                            selectedGenres={selectedGenres}
+                                            selectedArtists={selectedArtists}
+                            />
                         }
                     </>
                     : <LoginForm/>
