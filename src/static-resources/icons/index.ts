@@ -12,7 +12,10 @@ import dancey from './dancey.png';
 import angry from './angry.png';
 import relaxed from './relaxed.png';
 import workout from './workout.png';
+import exportIcon from './export.png';
+import checkIcon from './check.png';
 
 export {pop, rock, country, indie, metal,
     jazz, hipHop, electronic, sad, happy,
-    dancey, angry, relaxed, workout}
+    dancey, angry, relaxed, workout, exportIcon,
+    checkIcon}

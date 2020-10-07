@@ -8,7 +8,7 @@ export const GenreSelectionBox: React.FC<GenreSelectionBoxProps> = observer(({ge
 
     return (
         <SelectionBox
-            styles={styles}
+            additionalClass="genre-selection-box"
             id={genre.id}
             label={genre.name}
             backgroundImage={genre.image}
@@ -21,13 +21,4 @@ export const GenreSelectionBox: React.FC<GenreSelectionBoxProps> = observer(({ge
 interface GenreSelectionBoxProps {
     genre: Genre,
     onItemSelect: (event: string) => void
-}
-
-const styles = {
-    backgroundRepeat: "no-repeat",
-    backgroundSize: 80,
-    backgroundPosition: "center",
-    backgroundColor: "white",
-    color: "#ff7676",
-    textShadow: "-1px 1px 1px #d1d1d1",
 }

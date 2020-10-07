@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {BaseCardStyle, EllipsisText, RoundImage} from "../styles/common-styles";
 
 
 /**
@@ -8,11 +9,9 @@ import styled from "styled-components";
 const BlankCell = (props: {width: number} & React.ThHTMLAttributes<HTMLTableHeaderCellElement>) => <th {...props} />
 export const PLAYLIST_REVIEW_TABLE_BACKGROUND_COLOR = "#fefefe";
 const baseTableHeader = `
-    border-radius: 25px;
-    border: 1px solid #dedede;
-    box-shadow: #d0d0d0 2px 2px 3px 0px;
+    ${BaseCardStyle};
     background: ${PLAYLIST_REVIEW_TABLE_BACKGROUND_COLOR};
-    margin: auto 8px;
+    margin: 0 8px;
     padding: 8px;
 `;
 export const PlaylistTable = styled.table`
@@ -28,11 +27,11 @@ export const PlaylistTable = styled.table`
 `,
     TrackNameTh = styled.th`
     ${baseTableHeader}
-    width: 50%;
+    flex: 2;
 `,
     PlaylistTh = styled.th`
     ${baseTableHeader}
-    width: 25%;
+    flex: 1;
 `;
 
 
@@ -41,21 +40,17 @@ export const PlaylistTable = styled.table`
  */
 const PLAYLIST_ITEM_PADDING = 8;
 export const PlaylistItemRow = styled.tr`
+    ${BaseCardStyle};
     display: flex;
-    margin: ${PLAYLIST_ITEM_PADDING}px auto;
-    border-radius: 35px;
-    border: 1px solid #dedede;
-    box-shadow: #d0d0d0 2px 2px 3px 0px;
+    margin: ${PLAYLIST_ITEM_PADDING}px 0;
     background: ${PLAYLIST_REVIEW_TABLE_BACKGROUND_COLOR};
     padding-right: ${PLAYLIST_ITEM_PADDING}px;
 `,
     TrackNameTd = styled.td`
-    width: 50%;
+    ${EllipsisText};
+    flex: 2;
     margin: auto;
     padding: ${PLAYLIST_ITEM_PADDING}px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     text-align: left;
 `,
     HeartButtonTd = styled.td`
@@ -64,11 +59,9 @@ export const PlaylistItemRow = styled.tr`
     height: 24px;
 `,
     PlaylistItemTd = styled.td`
-    width: 25%;
+    ${EllipsisText};
+    flex: 1;
     margin: auto;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     text-align: left;
 `;
 
@@ -89,9 +82,8 @@ export const AlbumImageContainer = styled.div`
     margin: 8px;    
 `,
     AlbumImage = styled.img`
+    ${RoundImage}
     ${albumImageBaseStyle}
-    border-radius: 50px;
-    box-shadow: 1px 1px 1px grey;
 `,
     //White overlay over the album art, when the user hovers it
     AlbumImageFilter = styled.div`

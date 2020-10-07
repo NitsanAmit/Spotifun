@@ -1,6 +1,7 @@
 import React, {AnchorHTMLAttributes} from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import externalLinkIcon from '../static-resources/icons/external_link.svg';
+import {EllipsisText} from "../styles/common-styles";
 
 export const Link: React.FunctionComponent<AnchorHTMLAttributes<HTMLAnchorElement> & LinkProps> = ({children, external, ...otherProps}) => {
     return (
@@ -21,10 +22,9 @@ export interface LinkProps {
 }
 
 const StyledContainer = styled.div`
-    display: inline;
+    ${EllipsisText};
     white-space: pre;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    display: inline;
 `,
     StyledLink = styled.a`
     text-decoration: none;

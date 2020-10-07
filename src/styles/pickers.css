@@ -3,6 +3,23 @@
 body {
     font-family: 'Titillium Web', sans-serif;
     background: #f8f8f8;
+    display: grid;
+}
+
+h3 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 68px;
+}
+
+h2 {
+    font-size: 30px;
+    color: #ff7676;
+    text-shadow: -1px 1px #585858;
+    text-align: center;
+    display: block;
+    margin: 0 auto 16px auto;
 }
 
 .picker-container {
@@ -10,7 +27,7 @@ body {
     column-gap: 5px;
     row-gap: 15px;
     justify-items: center;
-    grid-template-columns: repeat(auto-fit, 170px);
+    grid-template-columns: repeat(auto-fit, 110px);
     text-align: center;
     margin: 16px auto;
     width: 85%;
@@ -18,16 +35,18 @@ body {
     justify-content: center;
 }
 
+
 .selection-box {
     font-size: 12px;
     border-radius: 10px;
     box-shadow: 1px 2px 4px 1px lightgrey;
-    width: 130px;
-    height: 130px;
-    padding: 8px;
+    width: 90px;
+    height: 90px;
+    padding: 6px;
     cursor: pointer;
     color: white;
 }
+
 
 .selection-box:hover {
     opacity: 0.6;
@@ -41,18 +60,34 @@ body {
     box-shadow: 1px 2px 3px 3px #ff7676;
 }
 
-h3 {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    margin-top: 105px;
+.genre-selection-box {
+    background-repeat: no-repeat;
+    background-size: 60px;
+    background-position: center;
+    background-color: white;
+    color: #ff7676;
+    text-shadow: -1px 1px 1px #d1d1d1;
 }
 
-h2 {
-    font-size: 30px;
-    color: #ff7676;
-    text-shadow: -1px 1px #585858;
-    text-align: center;
-    display: block;
-    margin: 16px 10px;
+.artist-selection-box {
+    background-repeat: round;
+    text-shadow: -1px 1px 1px #434343;
+}
+
+/* optimization for desktops */
+@media (min-width: 420px) {
+    .genre-selection-box {
+        background-size: 80px;
+    }
+    .selection-box {
+        width: 130px;
+        height: 130px;
+        padding: 8px;
+    }
+    .picker-container {
+        grid-template-columns: repeat(auto-fit, 170px);
+    }
+    h3{
+        margin-top: 105px;
+    }
 }

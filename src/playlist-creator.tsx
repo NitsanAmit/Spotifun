@@ -7,10 +7,13 @@ import {LoginForm} from "./login-page/login-form";
 import {AuthService} from "./networking/auth-service";
 import {ArtistPicker} from "./artist-selection/artist-picker";
 import {PlaylistReview} from "./playlist-review/playlist-review";
+import {User} from "./models/entity-models";
+import {UserCard} from "./shared-components/user-card";
 
 export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService }> = observer((({authService}) => {
 
     const [step, setStep] = useState<AppStep>(AppStep.GenresSelection);
+    const [user, setUser] = useState<User>();
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
     const [spotifyApi, setSpotifyApi] = useState<SpotifyApi>();
@@ -20,6 +23,13 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
             setSpotifyApi(new SpotifyApi(authService.token, authService.refreshAuthToken));
         }
     }, [authService.refreshAuthToken, authService.token])
+
+    useEffect(() => {
+        spotifyApi?.getUserDetails().then(user => {
+            setUser(user);
+            authService.saveUserId(user.id);
+        });
+    }, [spotifyApi]);
 
     const onGenreSelect = (genres: string[]) => {
         setSelectedGenres(genres);
@@ -32,7 +42,11 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
     }
 
     return (
-        <div style={{alignItems: "center", textAlign: "center"}}>
+        <>
+            {
+                user &&
+                <UserCard user={user}/>
+            }
             {
                 spotifyApi ?
                     <>
@@ -48,6 +62,7 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                         {
                             step === AppStep.PlaylistReview &&
                             <PlaylistReview spotifyApi={spotifyApi}
+                                            userId={authService.userId}
                                             selectedGenres={selectedGenres}
                                             selectedArtists={selectedArtists}
                             />
@@ -55,6 +70,6 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                     </>
                     : <LoginForm/>
             }
-        </div>
+        </>
     )
 }))
