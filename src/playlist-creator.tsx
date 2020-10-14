@@ -20,16 +20,14 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
 
     useEffect(() => {
         if (authService.token) {
-            setSpotifyApi(new SpotifyApi(authService.token, authService.refreshAuthToken));
+            const api = new SpotifyApi(authService.token, authService.refreshAuthToken);
+            api.getUserDetails().then(user => {
+                setUser(user);
+                authService.saveUserId(user.id);
+            });
+            setSpotifyApi(api);
         }
     }, [authService.refreshAuthToken, authService.token])
-
-    useEffect(() => {
-        spotifyApi?.getUserDetails().then(user => {
-            setUser(user);
-            authService.saveUserId(user.id);
-        });
-    }, [spotifyApi]);
 
     const onGenreSelect = (genres: string[]) => {
         setSelectedGenres(genres);

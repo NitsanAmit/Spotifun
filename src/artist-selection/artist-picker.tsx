@@ -50,7 +50,7 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
             }
         </>
     )
-    //TODO add a slider to choose the amount of songs you wish to get in the created playlist, and pass as limit to getRecommendations
+    //TODO NOAM add a slider to choose the amount of songs you wish to get in the created playlist, and pass as limit to getRecommendations
 });
 
 interface ArtistPickerProps {
