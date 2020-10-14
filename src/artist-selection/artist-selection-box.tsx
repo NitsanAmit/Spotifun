@@ -1,4 +1,3 @@
-
 import React from "react";
 import {Artist} from "../models/entity-models";
 import {SelectionBox} from "../shared-components/selection-box";
@@ -9,7 +8,7 @@ export const ArtistSelectionBox: React.FC<ArtistSelectionBoxProps> = observer(({
 
     return (
         <SelectionBox
-            styles={styles}
+            additionalClass="artist-selection-box"
             id={artist.id}
             label={artist.name}
             backgroundImage={artist.image || indie}
@@ -22,9 +21,4 @@ export const ArtistSelectionBox: React.FC<ArtistSelectionBoxProps> = observer(({
 interface ArtistSelectionBoxProps {
     artist: Artist,
     onItemSelect: (event: string) => void
-}
-
-const styles = {
-    backgroundRepeat: "round",
-    textShadow: "-1px 1px 1px #434343",
 }

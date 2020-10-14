@@ -1,4 +1,4 @@
-import {Artist, Track} from "../models/entity-models";
+import {Artist, Track, User} from "../models/entity-models";
 
 export const convertArtistsToAppObject = (items: ArtistDTO[]): Artist[] => {
     return items.map((artist: ArtistDTO) => (
@@ -12,7 +12,7 @@ export const convertArtistsToAppObject = (items: ArtistDTO[]): Artist[] => {
     ));
 };
 
-export const convertTracksToAppObject = (tracks: any[]): Track[] => {
+export const convertTracksToAppObject = (tracks: TrackDTO[]): Track[] => {
     return tracks.map((track: TrackDTO) => (
         {
             id: track.id,
@@ -27,8 +27,17 @@ export const convertTracksToAppObject = (tracks: any[]): Track[] => {
             duration: track.duration_ms,
             externalUrl: track.external_urls.spotify,
             previewUrl: track.preview_url,
+            uri: track.uri,
         } as Track
     ));
+};
+
+export const convertUserToAppObject = (user: userDTO): User => {
+    return {
+        id: user.id,
+        name: user.display_name,
+        image: user.images[0].url,
+    };
 };
 
 export const shuffle = (list: any[]) => {
@@ -56,11 +65,18 @@ interface TrackDTO {
     duration_ms: number;
     external_urls: { spotify: string };
     preview_url: string;
+    uri: string;
 }
 
 interface AlbumDTO {
     id: string;
     name: string;
     external_urls: { spotify: string };
+    images: { url: string }[];
+}
+
+interface userDTO {
+    id: string;
+    display_name: string;
     images: { url: string }[];
 }

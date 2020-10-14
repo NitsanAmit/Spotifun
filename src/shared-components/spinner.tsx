@@ -1,19 +1,32 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 const BaseSpinner: React.FunctionComponent<BaseSpinnerProps & React.BaseHTMLAttributes<HTMLDivElement>> = (props) =>
     <div {...props} />;
 
 interface BaseSpinnerProps {
-    size?: "small" | "large";
-    background?: string;
+    size?: SpinnerSize;
+    backgroundColor?: string;
+}
+
+export enum SpinnerSize{
+    small,
+    medium,
+    large
 }
 export const Spinner = styled(BaseSpinner)`
     font-size: 10px;
-    margin: 8px auto;
+    margin: auto;
     text-indent: -9999em;
     ${(props: any) => {
-        const size = props.size === 'large' ? '6em' : '3em';
+        let size;
+        if (props.size === SpinnerSize.large) {
+            size = '6em';
+        } else if( props.size === SpinnerSize.small) {
+            size = '16px';
+        } else {
+            size = '3em';
+        }
         return {
             width: size,
             height: size,

@@ -6,6 +6,7 @@ export class AuthService {
     @observable
     token: string = '';
 
+    userId: string = '';
     expirationTime: Date | undefined;
 
     private refreshToken: string = '';
@@ -35,7 +36,7 @@ export class AuthService {
                 if (response.status === 200) {
                     return response.json();
                 }
-                throw "Error";
+                throw new Error("auth unsuccessful");
             })
             .then((response: AuthResponse) => {
                 this.token = response.access_token;
@@ -81,6 +82,10 @@ export class AuthService {
         currentTime.setMilliseconds(currentTime.getMilliseconds() + (expiresIn * 1000));
         this.expirationTime = currentTime;
     };
+
+    saveUserId(userId: string){
+        this.userId = userId;
+    }
 }
 
 interface AuthResponse {

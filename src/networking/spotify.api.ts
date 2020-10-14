@@ -1,6 +1,11 @@
-import {Artist, Track} from "../models/entity-models";
+import {Artist, Track, User} from "../models/entity-models";
 import {Genres} from "../models/genres";
-import {convertArtistsToAppObject, convertTracksToAppObject, shuffle} from "./networking.helper";
+import {
+    convertArtistsToAppObject,
+    convertTracksToAppObject,
+    convertUserToAppObject,
+    shuffle
+} from "./networking.helper";
 
 export class SpotifyApi {
 
@@ -12,20 +17,31 @@ export class SpotifyApi {
         this.onTokenExpired = onTokenExpired;
     }
 
+    getUserDetails = async (retry = false): Promise<User> => {
+        try {
+            const user = await fetch("https://api.spotify.com/v1/me", this.getHeaders())
+                .then(this.readResponse)
+                .then(user => convertUserToAppObject(user));
+            const recentlyPlayed = await fetch("https://api.spotify.com/v1/me/player/recently-played?limit=1", this.getHeaders())
+                .then(this.readResponse)
+                .then(response => response.items[0].track)
+                .then(track => convertTracksToAppObject([track])[0]);
+
+            return {
+                ...user,
+                recentlyPlayed
+            }
+        } catch (e) {
+            if (retry) {
+                return Promise.reject("Error fetching top artists");
+            }
+            return this.onTokenExpired().then(() => this.getUserDetails(true));
+        }
+    }
+
     getTopArtist = (retry = false): Promise<Artist[]> => {
-        return fetch("https://api.spotify.com/v1/me/top/artists?limit=50",
-            {
-                method: 'GET',
-                headers: {
-                    'Authorization': "Bearer " + this.token,
-                },
-            })
-            .then(response => {
-                if (response.status !== 200) {
-                    throw "fetch unsuccessful";
-                }
-                return response.json();
-            })
+        return fetch("https://api.spotify.com/v1/me/top/artists?limit=50", this.getHeaders())
+            .then(this.readResponse)
             .then(response => response.items)
             .then((items) => convertArtistsToAppObject(items))
             .catch(() => {
@@ -40,19 +56,8 @@ export class SpotifyApi {
         const baseUrl = "https://api.spotify.com/v1/recommendations";
         const spotifyGenres = genres ? this.getSpotifyGenres(genres, true) : undefined;
         const queryParams = this.getQueryString({"seed_genres": spotifyGenres, "seed_artists": artists});
-        return fetch(`${baseUrl}?${queryParams}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Authorization': "Bearer " + this.token,
-                },
-            })
-            .then(response => {
-                if (response.status !== 200) {
-                    throw "fetch unsuccessful";
-                }
-                return response.json();
-            })
+        return fetch(`${baseUrl}?${queryParams}`, this.getHeaders())
+            .then(this.readResponse)
             .then(response => response.tracks)
             .then((tracks) => convertTracksToAppObject(tracks))
             .catch(() => {
@@ -72,19 +77,8 @@ export class SpotifyApi {
 
     search = (query: string): Promise<Artist[]> => {
         const baseUrl = "https://api.spotify.com/v1/search?type=artist&q=";
-        return fetch(`${baseUrl}${query}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Authorization': "Bearer " + this.token,
-                },
-            })
-            .then(response => {
-                if (response.status !== 200) {
-                    throw "fetch unsuccessful";
-                }
-                return response.json();
-            })
+        return fetch(`${baseUrl}${query}`, this.getHeaders())
+            .then(this.readResponse)
             .then(response => response.artists.items);
     }
 
@@ -111,19 +105,7 @@ export class SpotifyApi {
     checkUserSavedTracks = (tracksIds: string[]): Promise<boolean[]> => {
         const baseUrl = "https://api.spotify.com/v1/me/tracks/contains";
         const queryParams = this.getQueryString({"ids": tracksIds});
-        return fetch(`${baseUrl}?${queryParams}`,
-            {
-                method: 'GET',
-                headers: {
-                    'Authorization': "Bearer " + this.token,
-                },
-            })
-            .then(response => {
-                if (response.status !== 200) {
-                    throw "fetch unsuccessful";
-                }
-                return response.json();
-            });
+        return fetch(`${baseUrl}?${queryParams}`, this.getHeaders()).then(this.readResponse);
     }
 
     removeFromUserLibrary = (trackId: string): Promise<void> => {
@@ -137,19 +119,56 @@ export class SpotifyApi {
     changeSaveStatus = (trackId: string, method: 'PUT' | 'DELETE'): Promise<void> => {
         const baseUrl = "https://api.spotify.com/v1/me/tracks";
         const queryParams = this.getQueryString({"ids": [trackId]});
-        return fetch(`${baseUrl}?${queryParams}`,
-            {
-                method,
-                headers: {
-                    'Authorization': "Bearer " + this.token,
-                },
-            })
+        return fetch(`${baseUrl}?${queryParams}`, this.getHeaders(method))
             .then(response => {
                 if (response.status !== 200) {
-                    throw "fetch unsuccessful";
+                    throw new Error("fetch unsuccessful");
                 }
             });
     }
 
+    createPlaylist = async (trackUris: string[], userId: string, playlistName: string, retry = false): Promise<void> => {
+        try {
+            const playlist = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+                method: 'POST',
+                headers: {
+                    ...this.getHeaders().headers,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: playlistName,
+                    description: 'Auto-generated playlist by Spotifun',
+                }),
+            }).then(this.readResponse);
+
+            console.log(playlist);
+            await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
+                method: 'POST',
+                headers: {
+                    ...this.getHeaders().headers,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({uris: trackUris}),
+            }).then(this.readResponse);
+
+        } catch (e) {
+            if (retry) {
+                return Promise.reject("Error creating playlist");
+            }
+            return this.onTokenExpired().then(() => this.createPlaylist(trackUris, userId, playlistName, true));
+        }
+    }
+
+    private getHeaders = (method = 'GET') => ({
+        method,
+        headers: {'Authorization': "Bearer " + this.token}
+    });
+
+    private readResponse = (response: Response) => {
+        if (response.status !== 200 && response.status !== 201) {
+            throw new Error("fetch unsuccessful");
+        }
+        return response.json();
+    }
 
 }

@@ -10,5 +10,9 @@
   "login_form_info_box_content": "Please login to enjoy our amazing applicatzyush",
   "playlist_item_heart_button_alt": "Add this song to your library",
   "playlist_item_album_image_alt": "album art",
-  "playlist_item_album_image_play_button_alt": "play preview"
+  "playlist_item_album_image_play_button_alt": "play preview",
+  "playlist_controls_save_button_playlist_saved": "Playlist saved!",
+  "playlist_controls_save_button_save_playlist": "Save to Spotify",
+  "playlist_review_title": "Here is your new amazing playlist!!!",
+  "user_card_profile_alt": "Your handsome self"
 }

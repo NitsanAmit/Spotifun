@@ -25,7 +25,9 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
                         {
                             artistStore.isFromRecommendation &&
                             <InformationPanel title={strings.artists_picker_info_box_title}
-                                              description={strings.artists_picker_info_box_content}/>
+                                              description={strings.artists_picker_info_box_content}
+                                              canDismiss
+                            />
                         }
                         <h2>{strings.artists_picker_title}</h2>
                         <div className="picker-container">

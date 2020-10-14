@@ -26,6 +26,7 @@ export interface Track {
     externalUrl: string;
     previewUrl: string;
     inUserLibrary?: boolean;
+    uri: string;
 }
 
 export interface Album {
@@ -33,4 +34,11 @@ export interface Album {
     name: string;
     image: string;
     externalUrl: string;
+}
+
+export interface User {
+    id: string;
+    name: string;
+    image: string;
+    recentlyPlayed?: Track;
 }

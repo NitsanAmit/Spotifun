@@ -34,7 +34,7 @@ export const PlaylistItem: React.FunctionComponent<PlaylistItemProps> = observer
                         track={track}
                         onHeartClick={playlistReviewStore.toggleTrackSaveStatus}
                     />
-                    : <Spinner background={PLAYLIST_REVIEW_TABLE_BACKGROUND_COLOR}/>
+                    : <Spinner backgroundColor={PLAYLIST_REVIEW_TABLE_BACKGROUND_COLOR}/>
                 }
             </Styled.HeartButtonTd>
         </Styled.PlaylistItemRow>
@@ -43,7 +43,8 @@ export const PlaylistItem: React.FunctionComponent<PlaylistItemProps> = observer
 
 const getArtistsListWithLinks = (artists: Artist[]) =>
     artists.map((artist, index) =>
-        <Link href={artist.externalUrl}
+        <Link key={artist.id}
+              href={artist.externalUrl}
               target="_blank">
             {artist.name + ((index !== artists.length - 1) ? ', ' : '')}
         </Link>
