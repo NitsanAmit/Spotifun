@@ -39,7 +39,7 @@ export class ArtistStore {
                         }
                     }
                     return accumulator;
-                }, {}))
+                }, {})) //TODO NOAM get at least 10 OF EACH GENRE!
             .then(artistsByGenre => Object.keys(artistsByGenre).length < 10 ? this.getRecommendations(artistsByGenre) : artistsByGenre)
             .then(artistsByGenre => this.artistsByGenre = artistsByGenre);
     };
