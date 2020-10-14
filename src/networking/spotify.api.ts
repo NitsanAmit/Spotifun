@@ -116,7 +116,7 @@ export class SpotifyApi {
         return this.changeSaveStatus(trackId, 'PUT');
     }
 
-    changeSaveStatus = (trackId: string, method: 'PUT' | 'DELETE'): Promise<void> => {
+    private changeSaveStatus = (trackId: string, method: 'PUT' | 'DELETE'): Promise<void> => {
         const baseUrl = "https://api.spotify.com/v1/me/tracks";
         const queryParams = this.getQueryString({"ids": [trackId]});
         return fetch(`${baseUrl}?${queryParams}`, this.getHeaders(method))
@@ -141,7 +141,6 @@ export class SpotifyApi {
                 }),
             }).then(this.readResponse);
 
-            console.log(playlist);
             await fetch(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
                 method: 'POST',
                 headers: {
