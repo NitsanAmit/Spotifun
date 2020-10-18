@@ -1,4 +1,5 @@
 import {Artist, Track, User} from "../models/entity-models";
+import {happy} from "../static-resources/icons";
 
 export const convertArtistsToAppObject = (items: ArtistDTO[]): Artist[] => {
     return items.map((artist: ArtistDTO) => (
@@ -36,7 +37,7 @@ export const convertUserToAppObject = (user: userDTO): User => {
     return {
         id: user.id,
         name: user.display_name,
-        image: user.images[0].url,
+        image: user.images?.length ? user.images[0].url : happy,
     };
 };
 

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {ChangeEvent, useContext, useEffect, useState} from "react";
 import "../styles/pickers.css"
 import {ArtistSelectionBox} from "./artist-selection-box";
 import {ArtistStore} from "./artist-store";
@@ -7,8 +7,9 @@ import {AppButton} from "../shared-components/app-button";
 import {observer} from "mobx-react";
 import {InformationPanel} from "../shared-components/info-panel";
 import {LocaleContext} from "../spotifun";
+import {ArtistsSlider} from "./artists-slider";
 
-export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, selectedGenres, onFinish}) => {
+export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, selectedGenres, onSliderChange, onFinish}) => {
 
     const [artistStore, setArtistStore] = useState<ArtistStore>();
     const strings = useContext(LocaleContext);
@@ -41,6 +42,7 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
                                     />)
                             }
                         </div>
+                        <ArtistsSlider onSliderChange={onSliderChange}/>
                         <AppButton
                             label={artistStore.selectionComplete ? strings.artists_picker_proceed_button_enabled : strings.artists_picker_proceed_button_disabled}
                             disabled={!artistStore.selectionComplete}
@@ -50,11 +52,11 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
             }
         </>
     )
-    //TODO NOAM add a slider to choose the amount of songs you wish to get in the created playlist, and pass as limit to getRecommendations
 });
 
 interface ArtistPickerProps {
     spotifyApi: SpotifyApi;
     selectedGenres: string[];
+    onSliderChange: (e: ChangeEvent<HTMLInputElement>) => void;
     onFinish: (genres: string[]) => void;
 }

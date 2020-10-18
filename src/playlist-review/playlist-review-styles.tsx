@@ -119,4 +119,5 @@ export const AlbumImageContainer = styled.div`
 export const StyledHeartButton = styled.img`
     height: 24px;
     filter: invert(74%) sepia(60%) saturate(4555%) hue-rotate(318deg) brightness(109%) contrast(114%);
+    cursor: pointer;
 `;

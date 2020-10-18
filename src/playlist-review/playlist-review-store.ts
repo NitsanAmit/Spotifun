@@ -13,12 +13,13 @@ export class PlaylistReviewStore {
     @observable
     currentAudio: HTMLAudioElement | undefined;
 
-    constructor(private readonly spotifyApi: SpotifyApi, private readonly selectedGenres: string[], private readonly selectedArtists: string[]) {
+    constructor(private readonly spotifyApi: SpotifyApi, private readonly selectedGenres: string[],
+                private readonly selectedArtists: string[], private readonly playlistLimit: number) {
         this.init();
     }
 
     private init() {
-        this.spotifyApi?.getRecommendations(this.selectedGenres, this.selectedArtists)
+        this.spotifyApi?.getRecommendations(this.playlistLimit, this.selectedGenres, this.selectedArtists)
             .then((recommendations: Track[]) => {
                 this.tracks = recommendations;
                 this.spotifyApi.checkUserSavedTracks(recommendations.map((track: Track) => track.id)).then((saveStatuses: boolean[]) => {
@@ -31,7 +32,7 @@ export class PlaylistReviewStore {
 
     toggleTrackSaveStatus = (trackId: string) => {
         const trackIndex = this.tracks.findIndex((track) => track.id === trackId);
-        if (!trackIndex) return;
+        if (trackIndex === -1) return;
         let savePromise = this.tracks[trackIndex].inUserLibrary ?
             this.spotifyApi.removeFromUserLibrary(trackId) :
             this.spotifyApi.addToUserLibrary(trackId);

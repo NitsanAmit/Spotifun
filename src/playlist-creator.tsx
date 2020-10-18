@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {observer} from "mobx-react";
 import {AppStep} from "./models/app-consts";
 import {SpotifyApi} from "./networking/spotify.api";
@@ -16,6 +16,7 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
     const [user, setUser] = useState<User>();
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
+    const [recommendationLimit, setRecommendationLimit] = useState<number>(20);
     const [spotifyApi, setSpotifyApi] = useState<SpotifyApi>();
 
     useEffect(() => {
@@ -39,6 +40,10 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
         setStep(AppStep.PlaylistReview);
     }
 
+    const onSliderChange = async (event: ChangeEvent<HTMLInputElement>) => {
+        setRecommendationLimit(event.target.valueAsNumber);
+    }
+
     return (
         <>
             {
@@ -54,7 +59,9 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                         }
                         {
                             step === AppStep.ArtistsSelection &&
-                            <ArtistPicker spotifyApi={spotifyApi} selectedGenres={selectedGenres}
+                            <ArtistPicker spotifyApi={spotifyApi}
+                                          selectedGenres={selectedGenres}
+                                          onSliderChange={onSliderChange}
                                           onFinish={onArtistSelect}/>
                         }
                         {
@@ -63,6 +70,7 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                                             userId={authService.userId}
                                             selectedGenres={selectedGenres}
                                             selectedArtists={selectedArtists}
+                                            playlistLimit={recommendationLimit}
                             />
                         }
                     </>
