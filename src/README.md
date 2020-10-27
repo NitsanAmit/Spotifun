@@ -1,11 +1,11 @@
-## PR Checklist 
+# PR Checklist 
 
 1. Make sure app-consts.ts is not committed.
 2. Add unit tests for your changes.
 3. Manually test the app for regressions.
 
 
-## Deployment checklist + walkthrough
+# Deployment checklist + walkthrough
 
 1. Make sure app-consts.ts is not commited, but does contain:
     * The client id
