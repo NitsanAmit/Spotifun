@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import "../styles/pickers.css"
+import "../styles/styles.css"
 import {ArtistSelectionBox} from "./artist-selection-box";
 import {ArtistStore} from "./artist-store";
 import {SpotifyApi} from "../networking/spotify.api";

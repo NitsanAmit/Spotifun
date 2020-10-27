@@ -49,18 +49,18 @@ const StyledContainer = styled.button`
     margin: auto 8px;
     background: ${backgroundColor};
     outline: none;
-    padding: 8px;
+    padding: 12px;
     display: flex;
     flex-direction: row;
-    font: 14px 'Titillium Web', sans-serif;
+    font: 22px 'Titillium Web', sans-serif;
     cursor: ${(props: any) => props.disabled ? 'default' : 'pointer'};
 `,
     StyledInnerContainer = styled.div`
     margin: auto 0 auto 4px;
 `,
     StyledIcon = styled.img`
-    height: 16px;
-    width: 16px;
+    height: 24px;
+    width: 24px;
     margin: auto;
     filter: invert(74%) sepia(60%) saturate(4555%) hue-rotate(318deg) brightness(109%) contrast(114%);    
 `;
