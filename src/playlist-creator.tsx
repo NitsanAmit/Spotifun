@@ -61,7 +61,7 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                             step === AppStep.ArtistsSelection &&
                             <ArtistPicker spotifyApi={spotifyApi}
                                           selectedGenres={selectedGenres}
-                                          onSliderChange={onSliderChange}
+                                          onSliderValueChange={onSliderChange}
                                           onFinish={onArtistSelect}/>
                         }
                         {
@@ -70,7 +70,7 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                                             userId={authService.userId}
                                             selectedGenres={selectedGenres}
                                             selectedArtists={selectedArtists}
-                                            playlistLimit={recommendationLimit}
+                                            tracksLimit={recommendationLimit}
                             />
                         }
                     </>

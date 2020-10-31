@@ -9,7 +9,7 @@ import {InformationPanel} from "../shared-components/info-panel";
 import {LocaleContext} from "../spotifun";
 import {ArtistsSlider} from "./artists-slider";
 
-export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, selectedGenres, onSliderChange, onFinish}) => {
+export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, selectedGenres, onSliderValueChange, onFinish}) => {
 
     const [artistStore, setArtistStore] = useState<ArtistStore>();
     const strings = useContext(LocaleContext);
@@ -42,7 +42,7 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
                                     />)
                             }
                         </div>
-                        <ArtistsSlider onSliderChange={onSliderChange}/>
+                        <ArtistsSlider onSliderValueChange={onSliderValueChange}/>
                         <AppButton
                             label={artistStore.selectionComplete ? strings.artists_picker_proceed_button_enabled : strings.artists_picker_proceed_button_disabled}
                             disabled={!artistStore.selectionComplete}
@@ -57,6 +57,6 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
 interface ArtistPickerProps {
     spotifyApi: SpotifyApi;
     selectedGenres: string[];
-    onSliderChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onSliderValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
     onFinish: (genres: string[]) => void;
 }

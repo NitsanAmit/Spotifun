@@ -8,13 +8,13 @@ import {Genres} from "../models/genres";
 import {LocaleContext} from "../spotifun";
 
 
-export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({spotifyApi,userId , selectedGenres, selectedArtists, playlistLimit}) => {
+export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({spotifyApi,userId , selectedGenres, selectedArtists, tracksLimit}) => {
 
     const [playlistReviewStore, setPlaylistReviewStore] = useState<PlaylistReviewStore>();
     const strings = useContext(LocaleContext);
 
     useEffect(() => {
-        setPlaylistReviewStore(new PlaylistReviewStore(spotifyApi, selectedGenres, selectedArtists, playlistLimit));
+        setPlaylistReviewStore(new PlaylistReviewStore(spotifyApi, selectedGenres, selectedArtists, tracksLimit));
     }, [selectedArtists, selectedGenres, spotifyApi]);
 
     const savePlaylist = async () => {
@@ -48,5 +48,5 @@ interface PlaylistReviewProps {
     userId: string;
     selectedGenres: string[];
     selectedArtists: string[];
-    playlistLimit: number;
+    tracksLimit: number;
 }

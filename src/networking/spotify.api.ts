@@ -52,7 +52,7 @@ export class SpotifyApi {
             });
     }
 
-    getRecommendations = (limit: number, genres?: string[], artists?: string[], retry = false): Promise<Track[]> => {
+    getRecommendations = (genres?: string[], artists?: string[], retry = false, limit = 20): Promise<Track[]> => {
         const baseUrl = "https://api.spotify.com/v1/recommendations";
         const spotifyGenres = genres ? this.getSpotifyGenres(genres, true) : undefined;
         const queryParams = this.getQueryString({"seed_genres": spotifyGenres, "seed_artists": artists});
@@ -64,7 +64,7 @@ export class SpotifyApi {
                 if (retry) {
                     return Promise.reject("Error getting recommendations");
                 }
-                return this.onTokenExpired().then(() => this.getRecommendations(limit, genres, artists, true));
+                return this.onTokenExpired().then(() => this.getRecommendations(genres, artists, true, limit));
             });
     }
 
