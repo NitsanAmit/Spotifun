@@ -9,13 +9,13 @@ import {LocaleContext} from "../spotifun";
 import styled from "styled-components";
 
 
-export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({spotifyApi,userId , selectedGenres, selectedArtists}) => {
+export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({spotifyApi,userId , selectedGenres, selectedArtists, tracksLimit}) => {
 
     const [playlistReviewStore, setPlaylistReviewStore] = useState<PlaylistReviewStore>();
     const strings = useContext(LocaleContext);
 
     useEffect(() => {
-        setPlaylistReviewStore(new PlaylistReviewStore(spotifyApi, selectedGenres, selectedArtists));
+        setPlaylistReviewStore(new PlaylistReviewStore(spotifyApi, selectedGenres, selectedArtists, tracksLimit));
     }, [selectedArtists, selectedGenres, spotifyApi]);
 
     const savePlaylist = async () => {
@@ -50,6 +50,7 @@ interface PlaylistReviewProps {
     userId: string;
     selectedGenres: string[];
     selectedArtists: string[];
+    tracksLimit: number;
 }
 
 const StyledContainer = styled.div`

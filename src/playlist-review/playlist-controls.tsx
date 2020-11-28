@@ -49,10 +49,10 @@ const StyledContainer = styled.button`
     margin: auto 8px;
     background: ${backgroundColor};
     outline: none;
-    padding: 12px;
+    padding: 14px;
     display: flex;
     flex-direction: row;
-    font: 22px 'Titillium Web', sans-serif;
+    font: 16px 'Titillium Web', sans-serif;
     cursor: ${(props: any) => props.disabled ? 'default' : 'pointer'};
 `,
     StyledInnerContainer = styled.div`
