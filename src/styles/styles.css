@@ -6,20 +6,28 @@ body {
     display: grid;
 }
 
+h1, h2 {
+    color: #ff7676;
+    text-shadow: -1px 1px #585858;
+}
+
+h1 {
+    font-size: 50px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+    display: block;
+    margin: 0 auto 16px auto;
+}
+
 h3 {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     margin-top: 68px;
-}
-
-h2 {
-    font-size: 30px;
-    color: #ff7676;
-    text-shadow: -1px 1px #585858;
-    text-align: center;
-    display: block;
-    margin: 0 auto 16px auto;
 }
 
 .picker-container {

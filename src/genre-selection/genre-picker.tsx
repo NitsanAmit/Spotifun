@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {GenreSelectionBox} from "./genre-selection-box";
-import "../styles/pickers.css"
+import "../styles/styles.css"
 import {GenreStore} from "./genre-store";
 import {observer} from "mobx-react";
 import {AppButton} from "../shared-components/app-button";

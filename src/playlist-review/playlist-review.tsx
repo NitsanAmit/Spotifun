@@ -6,6 +6,7 @@ import {Spinner} from "../shared-components/spinner";
 import { PlaylistControls } from "./playlist-controls";
 import {Genres} from "../models/genres";
 import {LocaleContext} from "../spotifun";
+import styled from "styled-components";
 
 
 export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({spotifyApi,userId , selectedGenres, selectedArtists, tracksLimit}) => {
@@ -26,11 +27,12 @@ export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({sp
         <>
             {
                 playlistReviewStore ?
-                    <>
+                    <StyledContainer>
                         <h2>{strings.playlist_review_title}</h2>
+                        {strings.playlist_review_description}
                         <PlaylistReviewTable playlistReviewStore={playlistReviewStore}/>
                         <PlaylistControls onSave={savePlaylist}/>
-                    </>
+                    </StyledContainer>
                     : <Spinner/>
             }
         </>
@@ -50,3 +52,8 @@ interface PlaylistReviewProps {
     selectedArtists: string[];
     tracksLimit: number;
 }
+
+const StyledContainer = styled.div`
+    text-align: center;  
+    white-space: pre-line;
+`;

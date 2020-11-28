@@ -59,8 +59,8 @@ const StyledContainer = styled.button`
     margin: auto 0 auto 4px;
 `,
     StyledIcon = styled.img`
-    height: 16px;
-    width: 16px;
+    height: 24px;
+    width: 24px;
     margin: auto;
     filter: invert(74%) sepia(60%) saturate(4555%) hue-rotate(318deg) brightness(109%) contrast(114%);    
 `;
