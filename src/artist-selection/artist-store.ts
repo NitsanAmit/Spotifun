@@ -2,7 +2,6 @@ import {Artist} from "../models/entity-models";
 import {SpotifyApi} from "../networking/spotify.api";
 import {computed, observable} from "mobx";
 import {Genres} from "../models/genres";
-import {merge} from "lodash";
 
 export class ArtistStore {
 
@@ -10,13 +9,16 @@ export class ArtistStore {
     private readonly MIN_SELECTION = 1;
 
     @observable
-    artistsByGenre: { [key: string]: Artist } = {};
+    suggestedArtists: { [artistId: string]: Artist } = {}
 
     @observable
     selectedArtists: string[] = [];
 
     @observable
     isFromRecommendation = false;
+
+    @observable
+    tracksLimit = 20;
 
     @computed
     get selectionComplete(): boolean {
@@ -29,40 +31,42 @@ export class ArtistStore {
 
     createArtistsByGenre = () => {
         this.spotifyApi.getTopArtist()
-            .then((artists: Artist[]) =>
-                artists.reduce((accumulator: { [key: string]: Artist }, curArtist) => {
-                    for (const genre of this.selectedGenres) {
-                        for (const genreId of Genres[genre].genres) {
-                            if (curArtist.genres?.join(" ").includes(genreId)) {
-                                accumulator[curArtist.id] = curArtist;
-                            }
-                        }
+            .then((artists: Artist[]) => {
+                const needRecommendations = [];
+                for (const genre of this.selectedGenres) {
+                    let artistsMatchingGenreCount = 0;
+                    for (const genreId of Genres[genre].genres) {
+                        artists
+                            .filter(curArtist => curArtist.genres?.join(" ").includes(genreId))
+                            .forEach(curArtist => {
+                                this.suggestedArtists[curArtist.id] = curArtist;
+                                artistsMatchingGenreCount++;
+                            });
                     }
-                    return accumulator;
-                }, {})) //TODO NOAM get at least 10 OF EACH GENRE!
-            .then(artistsByGenre => Object.keys(artistsByGenre).length < 10 ? this.getRecommendations(artistsByGenre) : artistsByGenre)
-            .then(artistsByGenre => this.artistsByGenre = artistsByGenre);
+                    if (artistsMatchingGenreCount < 10) {
+                        needRecommendations.push(genre);
+                    }
+                }
+                return this.getGenreRecommendations(needRecommendations);
+            });
     };
 
-    private async getRecommendations(results: { [key: string]: Artist }): Promise<{ [key: string]: Artist }> {
-        return await this.spotifyApi.getRecommendedArtistsForGenres(this.selectedGenres)
+    private async getGenreRecommendations(genres: string[]) {
+        if (!genres) return;
+        await this.spotifyApi.getRecommendedArtistsForGenres(genres)
             .then((artists: Artist[]) => {
                 this.isFromRecommendation = true;
-                return artists.reduce((acc: { [key: string]: Artist }, artist) => {
-                    acc[artist.id] = artist;
-                    return acc;
-                }, {});
-            })
-            .then(artistsByGenre => merge(results, artistsByGenre));
+                artists.forEach(curArtist => this.suggestedArtists[curArtist.id] = curArtist);
+            });
     }
 
-    onItemSelect = (currArtistName: string) => {
-        if (!this.artistsByGenre[currArtistName].selected && this.selectedArtists.length < this.MAX_SELECTION) {
-            this.selectedArtists.push(currArtistName);
-            this.artistsByGenre[currArtistName].selected = !this.artistsByGenre[currArtistName].selected;
-        } else if (this.artistsByGenre[currArtistName].selected) {
-            this.artistsByGenre[currArtistName].selected = !this.artistsByGenre[currArtistName].selected;
-            this.selectedArtists.splice(this.selectedArtists.indexOf(currArtistName), 1);
+    onItemSelect = (artistId: string) => {
+        if (!this.suggestedArtists[artistId].selected && this.selectedArtists.length < this.MAX_SELECTION) {
+            this.selectedArtists.push(artistId);
+            this.suggestedArtists[artistId].selected = !this.suggestedArtists[artistId].selected;
+        } else if (this.suggestedArtists[artistId].selected) {
+            this.suggestedArtists[artistId].selected = !this.suggestedArtists[artistId].selected;
+            this.selectedArtists.splice(this.selectedArtists.indexOf(artistId), 1);
         }
     };
 

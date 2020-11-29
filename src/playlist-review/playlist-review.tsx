@@ -16,7 +16,7 @@ export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({sp
 
     useEffect(() => {
         setPlaylistReviewStore(new PlaylistReviewStore(spotifyApi, selectedGenres, selectedArtists, tracksLimit));
-    }, [selectedArtists, selectedGenres, spotifyApi]);
+    }, [selectedArtists, selectedGenres, spotifyApi, tracksLimit]);
 
     const savePlaylist = async () => {
         if (!playlistReviewStore) return;
