@@ -4,8 +4,8 @@ import {
     convertArtistsToAppObject,
     convertTracksToAppObject,
     convertUserToAppObject,
-    shuffle
 } from "./networking.helper";
+import { shuffle } from "lodash";
 
 export class SpotifyApi {
 

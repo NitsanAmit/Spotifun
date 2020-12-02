@@ -1,5 +1,4 @@
-import React, {ChangeEvent, useContext, useEffect, useState} from "react";
-import "../styles/pickers.css"
+import React, {useContext, useEffect, useState} from "react";
 import {ArtistSelectionBox} from "./artist-selection-box";
 import {ArtistStore} from "./artist-store";
 import {SpotifyApi} from "../networking/spotify.api";
@@ -7,9 +6,10 @@ import {AppButton} from "../shared-components/app-button";
 import {observer} from "mobx-react";
 import {InformationPanel} from "../shared-components/info-panel";
 import {LocaleContext} from "../spotifun";
-import {ArtistsSlider} from "./artists-slider";
+import {TracksLimitSlider} from "./tracks-limit-slider";
+import { shuffle } from "lodash";
 
-export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, selectedGenres, onSliderValueChange, onFinish}) => {
+export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, selectedGenres, onFinish}) => {
 
     const [artistStore, setArtistStore] = useState<ArtistStore>();
     const strings = useContext(LocaleContext);
@@ -33,20 +33,20 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
                         <h2>{strings.artists_picker_title}</h2>
                         <div className="picker-container">
                             {
-                                Object.keys(artistStore.artistsByGenre).map((artistId: string) =>
+                                shuffle(Object.keys(artistStore.suggestedArtists)).map((artistId: string) =>
                                     artistId &&
                                     <ArtistSelectionBox
                                         key={artistId}
-                                        artist={artistStore.artistsByGenre[artistId]}
+                                        artist={artistStore?.suggestedArtists[artistId]}
                                         onItemSelect={artistStore.onItemSelect}
                                     />)
                             }
                         </div>
-                        <ArtistsSlider onSliderValueChange={onSliderValueChange}/>
+                        <TracksLimitSlider artistStore={artistStore} />
                         <AppButton
                             label={artistStore.selectionComplete ? strings.artists_picker_proceed_button_enabled : strings.artists_picker_proceed_button_disabled}
                             disabled={!artistStore.selectionComplete}
-                            onButtonClick={() => onFinish(artistStore.selectedArtists)}/>
+                            onButtonClick={() => onFinish(artistStore.selectedArtists, artistStore.tracksLimit)}/>
                     </>
                     : <h2>Loading...</h2>
             }
@@ -57,6 +57,5 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
 interface ArtistPickerProps {
     spotifyApi: SpotifyApi;
     selectedGenres: string[];
-    onSliderValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    onFinish: (genres: string[]) => void;
+    onFinish: (selectedArtistsIds: string[], selectedTracksLimit: number) => void;
 }

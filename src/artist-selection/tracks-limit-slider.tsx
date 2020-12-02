@@ -1,30 +1,26 @@
-import React, {ChangeEvent, InputHTMLAttributes, useState} from "react";
+import React, {ChangeEvent, InputHTMLAttributes} from "react";
 import {observer} from "mobx-react";
 import styled from "styled-components";
+import {ArtistStore} from "./artist-store";
 
-export const ArtistsSlider: React.FunctionComponent<ArtistsSliderProps> = observer(({onSliderValueChange}) => {
+export const TracksLimitSlider: React.FunctionComponent<ArtistsSliderProps> = observer(({artistStore}) => {
 
-    const [recommendationLimit, setRecommendationLimit] = useState<number>(50);
-    // const strings = useContext(LocaleContext);
-
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setRecommendationLimit(e.target.valueAsNumber);
-        onSliderValueChange(e);
-    }
+    const onSliderChange = (e: ChangeEvent<HTMLInputElement>) => artistStore.tracksLimit = e.target.valueAsNumber;
 
     return (
         <StyledContainer>
-            <StyleHeader>I want <b>{recommendationLimit}</b> tracks on my playlist</StyleHeader>
-            <StyleSlider // TODO: restart slider to 20 instead of 50 - "value" doesn't work
+            <StyleHeader>I want <b>{artistStore.tracksLimit}</b> tracks on my playlist</StyleHeader>
+            <StyleSlider
                 {...sliderProps}
-                onChange={(e) => onChange(e)}
+                defaultValue={artistStore.tracksLimit}
+                onChange={onSliderChange}
             />
         </StyledContainer>
     );
 });
 
 interface ArtistsSliderProps {
-    onSliderValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    artistStore: ArtistStore;
 }
 
 const sliderProps : InputHTMLAttributes<HTMLInputElement> = {
@@ -49,7 +45,7 @@ const StyledContainer = styled.div`
     -webkit-transition: .2s;
     transition: opacity .2s;
     &:hover {
-        pacity: 1;
+        opacity: 1;
     }
     &::-webkit-slider-thumb {
         -webkit-appearance: none;

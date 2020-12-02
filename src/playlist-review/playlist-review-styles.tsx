@@ -79,7 +79,7 @@ const albumImageBaseStyle = `
 `
 export const AlbumImageContainer = styled.div`
     ${albumImageBaseStyle}
-    margin: 8px;    
+    margin: 4px;    
 `,
     AlbumImage = styled.img`
     ${RoundImage}

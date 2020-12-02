@@ -52,11 +52,11 @@ const StyledContainer = styled.button`
     padding: 14px;
     display: flex;
     flex-direction: row;
-    font: 16px 'Titillium Web', sans-serif;
+    font: 700 16px 'Titillium Web', sans-serif;
     cursor: ${(props: any) => props.disabled ? 'default' : 'pointer'};
 `,
     StyledInnerContainer = styled.div`
-    margin: auto 0 auto 4px;
+    margin: auto 0 auto 8px;
 `,
     StyledIcon = styled.img`
     height: 24px;
