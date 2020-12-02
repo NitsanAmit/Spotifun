@@ -51,7 +51,7 @@ export class ArtistStore {
             });
     };
 
-    private async getGenreRecommendations(genres: string[]) {
+    private async getGenreRecommendations(genres: string[]): Promise<void> {
         if (!genres) return;
         await this.spotifyApi.getRecommendedArtistsForGenres(genres)
             .then((artists: Artist[]) => {

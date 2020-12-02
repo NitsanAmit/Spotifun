@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from "react";
-import {ArtistSelectionBox} from "./artist-selection-box";
 import {ArtistStore} from "./artist-store";
 import {SpotifyApi} from "../networking/spotify.api";
 import {AppButton} from "../shared-components/app-button";
@@ -7,7 +6,7 @@ import {observer} from "mobx-react";
 import {InformationPanel} from "../shared-components/info-panel";
 import {LocaleContext} from "../spotifun";
 import {TracksLimitSlider} from "./tracks-limit-slider";
-import { shuffle } from "lodash";
+import {ArtistsList} from "./artists-list";
 
 export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, selectedGenres, onFinish}) => {
 
@@ -31,17 +30,7 @@ export const ArtistPicker: React.FC<ArtistPickerProps> = observer(({spotifyApi, 
                             />
                         }
                         <h2>{strings.artists_picker_title}</h2>
-                        <div className="picker-container">
-                            {
-                                shuffle(Object.keys(artistStore.suggestedArtists)).map((artistId: string) =>
-                                    artistId &&
-                                    <ArtistSelectionBox
-                                        key={artistId}
-                                        artist={artistStore?.suggestedArtists[artistId]}
-                                        onItemSelect={artistStore.onItemSelect}
-                                    />)
-                            }
-                        </div>
+                        <ArtistsList artistStore={artistStore}/>
                         <TracksLimitSlider artistStore={artistStore} />
                         <AppButton
                             label={artistStore.selectionComplete ? strings.artists_picker_proceed_button_enabled : strings.artists_picker_proceed_button_disabled}
