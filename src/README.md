@@ -7,10 +7,10 @@
 
 # Deployment checklist + walkthrough
 
-1. Make sure app-consts.ts is not commited, but does contain:
+1. Make sure app-consts.ts is not committed, but does contain:
     * The client id
     * The client secret
-    * The corrent redirect uri: https://spotifun-d2f93.firebaseapp.com/
+    * The correct redirect uri: https://spotifun-d2f93.firebaseapp.com/
 
 2. Run `npm run build`.
-3. Run `Firebase deploy`.
+3. Run `firebase deploy`.
