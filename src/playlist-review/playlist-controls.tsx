@@ -51,7 +51,7 @@ export const PlaylistControls: React.FunctionComponent<{ onSave: () => Promise<v
 });
 
 
-const backgroundColor = "white";
+const backgroundColor = "#eaeaea";
 const StyledContainer = styled.div`
     position: -webkit-sticky;
     position: sticky;
@@ -59,7 +59,7 @@ const StyledContainer = styled.div`
     flex-direction: row;
     bottom: 0px;
     width: 100%;
-    background: #eaeaea;
+    background: ${backgroundColor};
 `,
     StyledCenteredContainer = styled.div`
     display: flex;

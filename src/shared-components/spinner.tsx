@@ -56,7 +56,7 @@ export const Spinner = styled(BaseSpinner)`
         content: '';
     }
     &:after {
-        background: ${(props: any) =>  props.background || '#f8f8f8'};
+        background: ${(props: any) =>  props.backgroundColor || '#f8f8f8'};
         width: 75%;
         height: 75%;
         border-radius: 50%;
