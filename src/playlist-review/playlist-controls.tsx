@@ -60,19 +60,19 @@ const StyledContainer = styled.div`
     bottom: 0px;
     width: 100%;
     background: #eaeaea;
-    padding: 8px;
 `,
     StyledCenteredContainer = styled.div`
     display: flex;
     flex-direction: row;
     margin: auto;
+    padding: 12px;
 `,
     StyledSaveButton = styled.button`
     outline: none;
     display: flex;
     margin-right: 4px;
     flex-direction: row;
-    font: 700 14px 'Titillium Web', sans-serif;
+    font: 700 16px 'Titillium Web', sans-serif;
     cursor: ${(props: any) => props.disabled ? 'default' : 'pointer'};
     border: none;
     background: none;
@@ -81,7 +81,7 @@ const StyledContainer = styled.div`
     outline: none;
     display: flex;
     flex-direction: row;
-    font: 700 14px 'Titillium Web', sans-serif;
+    font: 700 16px 'Titillium Web', sans-serif;
     cursor: ${(props: any) => props.disabled ? 'default' : 'pointer'};
     border: none;
     background: none;
@@ -90,7 +90,7 @@ const StyledContainer = styled.div`
     margin: auto 0 auto 8px;
 `,
     StyledIcon = styled.img`
-    height: 20px;
+    height: 22px;
     margin: auto;
     filter: invert(74%) sepia(60%) saturate(4555%) hue-rotate(318deg) brightness(109%) contrast(114%);    
 `;
