@@ -70,7 +70,7 @@ export const Genres: {[key: string]: Genre} = {
     reggae : {
         id: "reggae",
         name: "Reggae",
-        genres: ["runk"],
+        genres: ["reggae"],
         image: reggae,
         selected: false,
     },
