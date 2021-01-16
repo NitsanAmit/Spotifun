@@ -10,13 +10,15 @@ import {PlaylistReview} from "./playlist-review/playlist-review";
 import {User} from "./models/entity-models";
 import {UserCard} from "./shared-components/user-card";
 
+const DEFAULT_TRACKS_LIMIT = 20;
+
 export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService }> = observer((({authService}) => {
 
     const [step, setStep] = useState<AppStep>(AppStep.GenresSelection);
     const [user, setUser] = useState<User>();
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
-    const [tracksLimit, setTracksLimit] = useState<number>(20);
+    const [tracksLimit, setTracksLimit] = useState<number>(DEFAULT_TRACKS_LIMIT);
     const [spotifyApi, setSpotifyApi] = useState<SpotifyApi>();
 
     useEffect(() => {
@@ -39,6 +41,13 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
         setSelectedArtists(artists);
         setTracksLimit(selectedTracksLimit)
         setStep(AppStep.PlaylistReview);
+    }
+
+    const onStartOver = () => {
+        setSelectedGenres([]);
+        setSelectedArtists([]);
+        setTracksLimit(DEFAULT_TRACKS_LIMIT)
+        setStep(AppStep.GenresSelection);
     }
 
     return (
@@ -67,6 +76,7 @@ export const PlaylistCreator: React.FunctionComponent<{ authService: AuthService
                                             selectedGenres={selectedGenres}
                                             selectedArtists={selectedArtists}
                                             tracksLimit={tracksLimit}
+                                            onStartOver={onStartOver}
                             />
                         }
                     </>

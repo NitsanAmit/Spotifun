@@ -1,7 +1,7 @@
 import {Genre} from "./entity-models";
-import {pop, rock, country, indie, metal,
-    jazz, hipHop, electronic, sad, happy,
-    dancey, angry, relaxed, workout} from "../static-resources/icons";
+import {pop, rock, country, indie, metal, punk,
+    jazz, blues, hipHop, electronic, sad, happy,
+    dancey, angry, relaxed, workout, reggae, classical} from "../static-resources/icons";
 
 export const Genres: {[key: string]: Genre} = {
     pop : {
@@ -39,11 +39,18 @@ export const Genres: {[key: string]: Genre} = {
         image: metal,
         selected: false,
     },
-    jazzAndBlues : {
-        id: "jazzAndBlues",
-        name: "Jazz & Blues",
-        genres: ["jazz", "blues"],
+    jazz : {
+        id: "jazz",
+        name: "Jazz",
+        genres: ["jazz"],
         image: jazz,
+        selected: false,
+    },
+    blues : {
+        id: "blues",
+        name: "Blues",
+        genres: ["blues"],
+        image: blues,
         selected: false,
     },
     hipHop : {
@@ -53,11 +60,32 @@ export const Genres: {[key: string]: Genre} = {
         image: hipHop,
         selected: false,
     },
+    punk : {
+        id: "punk",
+        name: "Punk",
+        genres: ["punk"],
+        image: punk,
+        selected: false,
+    },
+    reggae : {
+        id: "reggae",
+        name: "Reggae",
+        genres: ["runk"],
+        image: reggae,
+        selected: false,
+    },
     electronic : {
         id: "electronic",
         name: "Electronic",
         genres: ["electro", "electronic", "edm"],
         image: electronic,
+        selected: false,
+    },
+    classical : {
+        id: "classical",
+        name: "classical",
+        genres: ["classical"],
+        image: classical,
         selected: false,
     },
     sad: {

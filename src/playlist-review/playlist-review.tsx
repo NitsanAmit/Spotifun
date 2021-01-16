@@ -9,7 +9,7 @@ import {LocaleContext} from "../spotifun";
 import styled from "styled-components";
 
 
-export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({spotifyApi,userId , selectedGenres, selectedArtists, tracksLimit}) => {
+export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({spotifyApi,userId , selectedGenres, selectedArtists, tracksLimit,onStartOver}) => {
 
     const [playlistReviewStore, setPlaylistReviewStore] = useState<PlaylistReviewStore>();
     const strings = useContext(LocaleContext);
@@ -31,7 +31,7 @@ export const PlaylistReview: React.FunctionComponent<PlaylistReviewProps> = ({sp
                         <h2>{strings.playlist_review_title}</h2>
                         {strings.playlist_review_description}
                         <PlaylistReviewTable playlistReviewStore={playlistReviewStore}/>
-                        <PlaylistControls onSave={savePlaylist}/>
+                        <PlaylistControls onSave={savePlaylist} onStartOver={onStartOver}/>
                     </StyledContainer>
                     : <Spinner/>
             }
@@ -51,6 +51,7 @@ interface PlaylistReviewProps {
     selectedGenres: string[];
     selectedArtists: string[];
     tracksLimit: number;
+    onStartOver: () => void;
 }
 
 const StyledContainer = styled.div`

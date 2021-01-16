@@ -3,6 +3,8 @@ import {SpotifyApi} from "../networking/spotify.api";
 import {computed, observable} from "mobx";
 import {Genres} from "../models/genres";
 
+const MINIMUM_ARTISTS_PER_GENRE = 14;
+
 export class ArtistStore {
 
     private readonly MAX_SELECTION = 3;
@@ -43,7 +45,7 @@ export class ArtistStore {
                                 artistsMatchingGenreCount++;
                             });
                     }
-                    if (artistsMatchingGenreCount < 10) {
+                    if (artistsMatchingGenreCount < MINIMUM_ARTISTS_PER_GENRE) {
                         needRecommendations.push(genre);
                     }
                 }
@@ -52,7 +54,7 @@ export class ArtistStore {
     };
 
     private async getGenreRecommendations(genres: string[]): Promise<void> {
-        if (!genres) return;
+        if (!genres?.length) return;
         await this.spotifyApi.getRecommendedArtistsForGenres(genres)
             .then((artists: Artist[]) => {
                 this.isFromRecommendation = true;

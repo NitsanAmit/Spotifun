@@ -23,6 +23,7 @@ export interface DeclaredStrings {
     playlist_item_album_image_play_button_alt: string;
     playlist_controls_save_button_playlist_saved: string;
     playlist_controls_save_button_save_playlist: string;
+    playlist_controls_start_over_button: string;
     playlist_review_title: string;
     playlist_review_description: string;
     user_card_profile_alt: string;
