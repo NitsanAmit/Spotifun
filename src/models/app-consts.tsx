@@ -7,9 +7,8 @@ export enum AppStep{
 
 export const LoginConsts = {
     authEndpoint: 'https://accounts.spotify.com/authorize',
-    clientId: 'CLIENT_ID',
-    clientSecret: 'CLIENT_SECRET',
-    redirectUri: "http://localhost:3000",
+    clientId: 'f35da0c6ac834eea9ff0ea58f245244c',
+    redirectUri: "https://spotifun-d2f93.firebaseapp.com/",
     scopes: `
         user-read-currently-playing
         user-read-recently-played

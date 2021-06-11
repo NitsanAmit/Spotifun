@@ -34,6 +34,6 @@ const StyledContainer = styled.div`
 `;
 
 const {authEndpoint, clientId, redirectUri, scopes} = LoginConsts;
-const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&response_type=code`
+export const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}&response_type=token`
 
 
